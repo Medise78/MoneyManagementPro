@@ -16,7 +16,7 @@ data class MoneyManagementDecrease(
 ) {
      //har ja estefade beshe chandta element ba khodesh dare
      companion object {
-          val colorsDecrease = listOf(RedOrange, LightGreen, Violet, BabyBlue, RedPink)
+          val colorsDecrease = listOf(RedOrange, LightGreen, Violet, BabyBlue)
      }
 }
 

@@ -20,7 +20,7 @@ data class MoneyManagement(
 ) {
      //har ja estefade beshe chandta element ba khodesh dare
      companion object {
-          val colors = listOf(RedOrange, LightGreen, Violet, BabyBlue, RedPink)
+          val colors = listOf(RedOrange, LightGreen, Violet, BabyBlue)
      }
 }
 
