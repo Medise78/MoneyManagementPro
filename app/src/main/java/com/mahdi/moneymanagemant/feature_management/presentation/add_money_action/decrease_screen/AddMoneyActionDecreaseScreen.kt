@@ -1,5 +1,6 @@
 package com.mahdi.moneymanagemant.feature_management.presentation.add_money_action.decrease_screen
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -19,13 +20,14 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.mahdi.moneymanagemant.feature_management.presentation.add_money_action.component.MyContent
+import com.mahdi.moneymanagemant.feature_management.presentation.add_money_action.component.CustomCalenderInput
 import com.mahdi.moneymanagemant.feature_management.presentation.add_money_action.component.RadioButtons
 import com.mahdi.moneymanagemant.feature_management.presentation.add_money_action.component.SaveButton
 import com.mahdi.moneymanagemant.feature_management.presentation.add_money_action.component.TextFieldCustom
 import com.mahdi.moneymanagemant.feature_management.presentation.money_actions.unit.RallyScreen
 import kotlinx.coroutines.flow.collectLatest
 
+@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @ExperimentalComposeUiApi
 @Composable
 fun AddMoneyActionDecreaseScreen(
@@ -153,7 +155,6 @@ fun AddMoneyActionDecreaseScreen(
 
                                    }
                                    Spacer(modifier = Modifier.height(40.dp))
-                                   MyContent()
                                    Spacer(modifier = Modifier.height(40.dp))
                                    Box(modifier = Modifier.padding(bottom = 15.dp)) {
                                         Text(

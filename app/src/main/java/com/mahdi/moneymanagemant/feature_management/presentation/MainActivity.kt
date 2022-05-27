@@ -21,8 +21,10 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import androidx.navigation.navDeepLink
 import com.mahdi.moneymanagemant.feature_management.data.radly_data.UserData
+import com.mahdi.moneymanagemant.feature_management.domain.model.money_increase_model.MoneyManagement
 import com.mahdi.moneymanagemant.feature_management.presentation.add_money_action.decrease_screen.AddMoneyActionDecreaseScreen
 import com.mahdi.moneymanagemant.feature_management.presentation.add_money_action.increaseScreen.AddMoneyActionScreen
+import com.mahdi.moneymanagemant.feature_management.presentation.add_money_action.increaseScreen.AddMoneyActionViewModel
 import com.mahdi.moneymanagemant.feature_management.presentation.money_actions.component.RallyTabRow
 import com.mahdi.moneymanagemant.feature_management.presentation.money_actions.component.accounts.AccountsBody
 import com.mahdi.moneymanagemant.feature_management.presentation.money_actions.component.accounts.SingleAccountBody
@@ -57,6 +59,8 @@ fun RallyApp() {
           var currentScreen by rememberSaveable {
                mutableStateOf(RallyScreen.Overview)
           }
+          val bottomBarState = rememberSaveable { (mutableStateOf(true)) }
+
 
           Scaffold(
                topBar = {
@@ -70,7 +74,7 @@ fun RallyApp() {
                     )
                }
           ) { innerPadding ->
-               RallyNavHost(navController, modifier = Modifier.padding(innerPadding))
+               RallyNavHost(navController, modifier = Modifier.padding(innerPadding), toggleBottomBar = {bottomBarState.value = it})
           }
      }
 }
@@ -79,6 +83,7 @@ fun RallyApp() {
 @Composable
 fun RallyNavHost(
      navController: NavHostController,
+     toggleBottomBar : (value : Boolean) -> Unit,
      modifier: Modifier = Modifier,
      viewModel: MoneyActionsViewModel = hiltViewModel(),
      viewModelDecrease: MoneyActionsDecreaseViewModel = hiltViewModel()
@@ -166,7 +171,9 @@ fun RallyNavHost(
                     }
                )
           ) {
-               AddMoneyActionScreen(navController = navController)
+               val addMoneyActionViewModel :AddMoneyActionViewModel = hiltViewModel()
+               val invoice :MoneyManagement = addMoneyActionViewModel.invoice
+               AddMoneyActionScreen(navController = navController , invoice = invoice , toggleBottomBar = toggleBottomBar )
           }
           composable(
                Screen.AddMoneyActionDecreaseScreen.route + "?moneyManagementDecreaseId={moneyManagementDecreaseId}",

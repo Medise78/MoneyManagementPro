@@ -20,6 +20,10 @@ class AddMoneyActionViewModel @Inject constructor(
      private val moneyActionUseCases: MoneyActionUseCases,
      savedStateHandle: SavedStateHandle
 ) : ViewModel() {
+
+     lateinit var invoice :MoneyManagement
+     //Error
+
      private val _titleState = mutableStateOf(AddMoneyActionState())
      val titleState: State<AddMoneyActionState> = _titleState
      private val _contentState = mutableStateOf(AddMoneyActionState())

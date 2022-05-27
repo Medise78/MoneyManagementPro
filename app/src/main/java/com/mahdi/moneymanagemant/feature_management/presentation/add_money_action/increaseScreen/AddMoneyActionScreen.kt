@@ -1,50 +1,42 @@
 package com.mahdi.moneymanagemant.feature_management.presentation.add_money_action.increaseScreen
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.BasicTextField
-import androidx.compose.foundation.text.KeyboardActions
-import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.toArgb
-import androidx.compose.ui.platform.LocalSoftwareKeyboardController
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.mahdi.moneymanagemant.feature_management.domain.model.money_increase_model.MoneyManagement
-import com.mahdi.moneymanagemant.feature_management.presentation.add_money_action.component.MyContent
-import com.mahdi.moneymanagemant.feature_management.presentation.add_money_action.component.RadioButtonsIncrease
-import com.mahdi.moneymanagemant.feature_management.presentation.add_money_action.component.SaveButtonIncrease
-import com.mahdi.moneymanagemant.feature_management.presentation.add_money_action.component.TextFieldCustom
-import com.mahdi.moneymanagemant.feature_management.presentation.util.Screen
-import com.mahdi.moneymanagemant.ui.theme.MoneyManagemantTheme
+import com.mahdi.moneymanagemant.feature_management.presentation.add_money_action.component.*
+import com.vanpra.composematerialdialogs.datetime.date.datepicker
 import kotlinx.coroutines.flow.collectLatest
 
+@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @ExperimentalComposeUiApi
 @Composable
 fun AddMoneyActionScreen(
        viewModel: AddMoneyActionViewModel = hiltViewModel(),
        navController: NavController,
+       invoice:MoneyManagement,
+       toggleBottomBar :(value :Boolean) ->Unit
 ) {
+     var invoiceDate by rememberSaveable { mutableStateOf(getInvoiceDate(invoice.invoiceDate)) }
+
+
      val scaffoldState = rememberScaffoldState()
      val titleState = viewModel.titleState.value
      val contentState = viewModel.contentState.value
@@ -168,7 +160,18 @@ fun AddMoneyActionScreen(
 
                                    }
                                    Spacer(modifier = Modifier.height(40.dp))
-                                   MyContent()
+                                   CustomCalenderInput(
+                                        header = "Date",
+                                        value = invoiceDate,
+                                        modifier = Modifier.fillMaxWidth(),
+                                        toggleBottomBar = toggleBottomBar,
+                                        content = {
+                                        datepicker{
+                                             invoiceDate = getInvoiceDate(it.toString())
+                                             invoice.invoiceDate = getInvoiceDateForDbFormat(invoiceDate)
+                                        }
+                                        }
+                                   )
                                    Spacer(modifier = Modifier.height(40.dp))
                                    Box(modifier = Modifier.padding(bottom = 15.dp)) {
                                         Text(

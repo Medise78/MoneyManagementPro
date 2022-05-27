@@ -4,6 +4,7 @@ import androidx.annotation.ColorInt
 import androidx.compose.ui.graphics.Color
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.google.gson.annotations.SerializedName
 import com.mahdi.moneymanagemant.feature_management.data.radly_data.Account
 import com.mahdi.moneymanagemant.feature_management.data.radly_data.UserData
 import com.mahdi.moneymanagemant.ui.theme.*
@@ -16,11 +17,13 @@ data class MoneyManagement(
      val price: String,
      val cardNumber: String,
      val timeStamp: Long,
+     @SerializedName("createdAt") var invoiceDate :String = "",
      @PrimaryKey val id: Int? = null
 ) {
      //har ja estefade beshe chandta element ba khodesh dare
      companion object {
           val colors = listOf(RedOrange, LightGreen, Violet, BabyBlue)
+
      }
 }
 
