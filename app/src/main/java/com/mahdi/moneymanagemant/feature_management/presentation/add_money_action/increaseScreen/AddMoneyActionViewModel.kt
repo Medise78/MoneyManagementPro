@@ -23,7 +23,7 @@ class AddMoneyActionViewModel @Inject constructor(
 
      lateinit var invoice :MoneyManagement
      //Error
-     //rr
+
 
      private val _titleState = mutableStateOf(AddMoneyActionState())
      val titleState: State<AddMoneyActionState> = _titleState
