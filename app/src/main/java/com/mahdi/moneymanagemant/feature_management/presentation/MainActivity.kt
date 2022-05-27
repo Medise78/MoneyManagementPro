@@ -12,19 +12,12 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavHostController
-import androidx.navigation.NavType
+import androidx.navigation.*
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import androidx.navigation.navArgument
-import androidx.navigation.navDeepLink
-import com.mahdi.moneymanagemant.feature_management.data.radly_data.UserData
-import com.mahdi.moneymanagemant.feature_management.domain.model.money_increase_model.MoneyManagement
 import com.mahdi.moneymanagemant.feature_management.presentation.add_money_action.decrease_screen.AddMoneyActionDecreaseScreen
 import com.mahdi.moneymanagemant.feature_management.presentation.add_money_action.increaseScreen.AddMoneyActionScreen
-import com.mahdi.moneymanagemant.feature_management.presentation.add_money_action.increaseScreen.AddMoneyActionViewModel
 import com.mahdi.moneymanagemant.feature_management.presentation.money_actions.component.RallyTabRow
 import com.mahdi.moneymanagemant.feature_management.presentation.money_actions.component.accounts.AccountsBody
 import com.mahdi.moneymanagemant.feature_management.presentation.money_actions.component.accounts.SingleAccountBody
@@ -40,6 +33,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+
      override fun onCreate(savedInstanceState: Bundle?) {
           super.onCreate(savedInstanceState)
           setContent {
@@ -59,8 +53,6 @@ fun RallyApp() {
           var currentScreen by rememberSaveable {
                mutableStateOf(RallyScreen.Overview)
           }
-          val bottomBarState = rememberSaveable { (mutableStateOf(true)) }
-
 
           Scaffold(
                topBar = {
@@ -68,13 +60,15 @@ fun RallyApp() {
                          allScreens = allScreens,
                          onTabSelected = { screen ->
                               currentScreen = screen
-                              navController.navigate(screen.name)
+                              navController.navigate(screen.name){
+                                   navController.popBackStack()
+                              }
                          },
                          currentScreen = currentScreen
                     )
                }
           ) { innerPadding ->
-               RallyNavHost(navController, modifier = Modifier.padding(innerPadding), toggleBottomBar = {bottomBarState.value = it})
+               RallyNavHost(navController, modifier = Modifier.padding(innerPadding))
           }
      }
 }
@@ -83,7 +77,6 @@ fun RallyApp() {
 @Composable
 fun RallyNavHost(
      navController: NavHostController,
-     toggleBottomBar : (value : Boolean) -> Unit,
      modifier: Modifier = Modifier,
      viewModel: MoneyActionsViewModel = hiltViewModel(),
      viewModelDecrease: MoneyActionsDecreaseViewModel = hiltViewModel()
@@ -171,9 +164,7 @@ fun RallyNavHost(
                     }
                )
           ) {
-               val addMoneyActionViewModel :AddMoneyActionViewModel = hiltViewModel()
-               val invoice :MoneyManagement = addMoneyActionViewModel.invoice
-               AddMoneyActionScreen(navController = navController , invoice = invoice , toggleBottomBar = toggleBottomBar )
+               AddMoneyActionScreen(navController = navController)
           }
           composable(
                Screen.AddMoneyActionDecreaseScreen.route + "?moneyManagementDecreaseId={moneyManagementDecreaseId}",
@@ -190,9 +181,13 @@ fun RallyNavHost(
 }
 
 private fun navigateToSingleAccount(navController: NavHostController, accountId: Int) {
-     navController.navigate("${RallyScreen.Accounts.name}/$accountId")
+     navController.navigate("${RallyScreen.Accounts.name}/$accountId"){
+          navController.popBackStack()
+     }
 }
 
 private fun navigateToSingleBills(navController: NavHostController, accountId: Int) {
-     navController.navigate("${RallyScreen.Bills.name}/$accountId")
+     navController.navigate("${RallyScreen.Bills.name}/$accountId"){
+          navController.popBackStack()
+     }
 }

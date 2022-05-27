@@ -9,6 +9,7 @@ import androidx.lifecycle.viewModelScope
 import com.mahdi.moneymanagemant.feature_management.domain.model.money_decrease_model.InvalidExceptionDecrease
 import com.mahdi.moneymanagemant.feature_management.domain.model.money_decrease_model.MoneyManagementDecrease
 import com.mahdi.moneymanagemant.feature_management.domain.use_case.decrease_use_case.MoneyActionDecreaseUseCases
+import com.mahdi.moneymanagemant.feature_management.presentation.add_money_action.increaseScreen.AddMoneyActionState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
@@ -28,8 +29,9 @@ class AddMoneyActionDecreaseViewModel @Inject constructor(
      val cardNumberState: State<AddMoneyActionDecreaseState> = _cardNumberState
      private val _priceState = mutableStateOf(AddMoneyActionDecreaseState())
      val priceState: State<AddMoneyActionDecreaseState> = _priceState
-     private val _changeColor =
-          mutableStateOf(MoneyManagementDecrease.colorsDecrease.random().toArgb())
+     private val _dateState = mutableStateOf(AddMoneyActionState())
+     val dateState : State<AddMoneyActionState> = _dateState
+     private val _changeColor = mutableStateOf(MoneyManagementDecrease.colorsDecrease.random().toArgb())
      val changeColor: State<Int> = _changeColor
      private val _sharedFlow = MutableSharedFlow<UiEventDecrease>()
      val sharedFlow = _sharedFlow.asSharedFlow()
@@ -54,6 +56,9 @@ class AddMoneyActionDecreaseViewModel @Inject constructor(
                                    )
                                    _priceState.value = priceState.value.copy(
                                         text = moneyManagement.priceDecrease
+                                   )
+                                   _dateState.value = dateState.value.copy(
+                                        text = moneyManagement.dateDecrease
                                    )
                                    _changeColor.value = moneyManagement.colorDecrease
                               }
@@ -98,7 +103,8 @@ class AddMoneyActionDecreaseViewModel @Inject constructor(
                                         idDecrease = currentId,
                                         nameDecrease = titleState.value.text,
                                         cardNumberDecrease = cardNumberState.value.text,
-                                        priceDecrease = priceState.value.text
+                                        priceDecrease = priceState.value.text,
+                                        dateDecrease = dateState.value.text
                                    )
                               )
                               _sharedFlow.emit(UiEventDecrease.SavedMoneyAction)

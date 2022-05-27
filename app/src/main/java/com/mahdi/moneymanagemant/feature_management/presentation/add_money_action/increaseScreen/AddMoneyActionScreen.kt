@@ -1,47 +1,60 @@
+@file:Suppress("UNUSED_EXPRESSION")
+
 package com.mahdi.moneymanagemant.feature_management.presentation.add_money_action.increaseScreen
 
-import android.annotation.SuppressLint
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.runtime.*
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.toArgb
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import androidx.navigation.navOptions
 import com.mahdi.moneymanagemant.feature_management.domain.model.money_increase_model.MoneyManagement
-import com.mahdi.moneymanagemant.feature_management.presentation.add_money_action.component.*
-import com.vanpra.composematerialdialogs.datetime.date.datepicker
+import com.mahdi.moneymanagemant.feature_management.presentation.add_money_action.component.MyContent
+import com.mahdi.moneymanagemant.feature_management.presentation.add_money_action.component.RadioButtonsIncrease
+import com.mahdi.moneymanagemant.feature_management.presentation.add_money_action.component.SaveButtonIncrease
+import com.mahdi.moneymanagemant.feature_management.presentation.add_money_action.component.TextFieldCustom
+import com.mahdi.moneymanagemant.feature_management.presentation.money_actions.increase_screen.MoneyActionsViewModel
+import com.mahdi.moneymanagemant.feature_management.presentation.util.Screen
+import com.mahdi.moneymanagemant.ui.theme.MoneyManagemantTheme
 import kotlinx.coroutines.flow.collectLatest
 
-@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @ExperimentalComposeUiApi
 @Composable
 fun AddMoneyActionScreen(
        viewModel: AddMoneyActionViewModel = hiltViewModel(),
        navController: NavController,
-       invoice:MoneyManagement,
-       toggleBottomBar :(value :Boolean) ->Unit
 ) {
-     var invoiceDate by rememberSaveable { mutableStateOf(getInvoiceDate(invoice.invoiceDate)) }
-
-
      val scaffoldState = rememberScaffoldState()
      val titleState = viewModel.titleState.value
      val contentState = viewModel.contentState.value
      val cardNumberState = viewModel.cardNumberState.value
      val priceState = viewModel.priceState.value
+     val dataState = viewModel.dateState.value
 
      LaunchedEffect(key1 = true) {
           viewModel.sharedFlow.collectLatest { event ->
@@ -55,7 +68,7 @@ fun AddMoneyActionScreen(
                }
           }
      }
-     Scaffold(floatingActionButton = { }, scaffoldState = scaffoldState) {
+     Scaffold(scaffoldState = scaffoldState) {
           Column(
                modifier = Modifier
                     .fillMaxSize()
@@ -88,12 +101,13 @@ fun AddMoneyActionScreen(
                                    Card(
                                         modifier = Modifier
                                              .fillMaxWidth(0.85f)
-                                             .height(55.dp), RoundedCornerShape(15.dp), elevation = 5.dp
+                                             .height(60.dp), RoundedCornerShape(15.dp), elevation = 5.dp
                                    ) {
                                         Box(
                                              modifier = Modifier
                                                   .fillMaxSize()
-                                                  .background(Color(0xFFF8F8F8))
+                                                  .background(Color(0xFFF8F8F8)),
+                                             contentAlignment = Alignment.Center
                                         ) {
                                              TextFieldCustom(
                                                   labelText = "Enter Title",
@@ -106,11 +120,8 @@ fun AddMoneyActionScreen(
                                                        )
                                                   },
                                                   keyboardType = KeyboardType.Text,
-                                                  vector = Icons.Default.AttachMoney,
                                              )
                                         }
-
-
                                    }
                                    Spacer(modifier = Modifier.height(40.dp))
                                    Box(modifier = Modifier.padding(bottom = 15.dp)) {
@@ -135,14 +146,15 @@ fun AddMoneyActionScreen(
                                         Card(
                                              modifier = Modifier
                                                   .fillMaxWidth(0.85f)
-                                                  .height(55.dp),
+                                                  .height(60.dp),
                                              RoundedCornerShape(15.dp),
                                              elevation = 5.dp
                                         ) {
                                              Box(
                                                   modifier = Modifier
                                                        .fillMaxSize()
-                                                       .background(Color(0xFFF8F8F8))
+                                                       .background(Color(0xFFF8F8F8)),
+                                                  contentAlignment = Alignment.Center
                                              ) {
                                                   TextFieldCustom(
                                                        labelText = "Enter Price...",
@@ -153,25 +165,13 @@ fun AddMoneyActionScreen(
                                                             )
                                                        },
                                                        keyboardType = KeyboardType.Number,
-                                                       vector = Icons.Default.AttachMoney
                                                   )
                                              }
                                         }
 
                                    }
                                    Spacer(modifier = Modifier.height(40.dp))
-                                   CustomCalenderInput(
-                                        header = "Date",
-                                        value = invoiceDate,
-                                        modifier = Modifier.fillMaxWidth(),
-                                        toggleBottomBar = toggleBottomBar,
-                                        content = {
-                                        datepicker{
-                                             invoiceDate = getInvoiceDate(it.toString())
-                                             invoice.invoiceDate = getInvoiceDateForDbFormat(invoiceDate)
-                                        }
-                                        }
-                                   )
+                                   MyContent()
                                    Spacer(modifier = Modifier.height(40.dp))
                                    Box(modifier = Modifier.padding(bottom = 15.dp)) {
                                         Text(
@@ -184,12 +184,13 @@ fun AddMoneyActionScreen(
                                    Card(
                                         modifier = Modifier
                                              .fillMaxWidth(0.85f)
-                                             .height(55.dp), RoundedCornerShape(15.dp), elevation = 5.dp
+                                             .height(60.dp), RoundedCornerShape(15.dp), elevation = 5.dp
                                    ) {
                                         Box(
                                              modifier = Modifier
                                                   .fillMaxSize()
-                                                  .background(Color(0xFFF8F8F8))
+                                                  .background(Color(0xFFF8F8F8)),
+                                             contentAlignment = Alignment.Center
                                         ) {
                                              TextFieldCustom(
                                                   labelText = "Enter Description...",
@@ -202,7 +203,6 @@ fun AddMoneyActionScreen(
                                                        )
                                                   },
                                                   keyboardType = KeyboardType.Text,
-                                                  vector = Icons.Default.AttachMoney
                                              )
                                         }
                                    }
@@ -218,12 +218,13 @@ fun AddMoneyActionScreen(
                                    Card(
                                         modifier = Modifier
                                              .fillMaxWidth(0.85f)
-                                             .height(55.dp), RoundedCornerShape(15.dp), elevation = 5.dp
+                                             .height(60.dp), RoundedCornerShape(15.dp), elevation = 5.dp
                                    ) {
                                         Box(
                                              modifier = Modifier
                                                   .fillMaxSize()
-                                                  .background(Color(0xFFF8F8F8))
+                                                  .background(Color(0xFFF8F8F8)),
+                                             contentAlignment = Alignment.Center
                                         ) {
                                              TextFieldCustom(
                                                   labelText = "Enter Card Number...",
@@ -236,7 +237,6 @@ fun AddMoneyActionScreen(
                                                        )
                                                   },
                                                   keyboardType = KeyboardType.Number,
-                                                  vector = Icons.Default.AttachMoney
                                              )
                                         }
                                    }

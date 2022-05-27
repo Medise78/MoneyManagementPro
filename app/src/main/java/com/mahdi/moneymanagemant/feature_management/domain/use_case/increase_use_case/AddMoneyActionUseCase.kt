@@ -22,6 +22,7 @@ class AddMoneyActionUseCase(
           if (moneyManagement.price.isBlank()) {
                throw InvalidException("Set Price")
           }
+
           repository.insertMoneyAction(moneyManagement)
      }
 }

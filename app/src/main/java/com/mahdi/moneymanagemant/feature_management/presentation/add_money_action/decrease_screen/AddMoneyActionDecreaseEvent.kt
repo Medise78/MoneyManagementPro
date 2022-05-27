@@ -7,6 +7,7 @@ sealed class AddMoneyActionDecreaseEvent {
      data class ContentDecrease(val text: String) : AddMoneyActionDecreaseEvent()
      data class CardNumberDecrease(val number: String) : AddMoneyActionDecreaseEvent()
      data class PriceDecrease(val price: String) : AddMoneyActionDecreaseEvent()
+     data class Date(val date : String) : AddMoneyActionDecreaseEvent()
      data class ChangeColorDecrease(val color: Int) : AddMoneyActionDecreaseEvent()
      object SavedActionDecrease : AddMoneyActionDecreaseEvent()
 }
