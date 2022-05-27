@@ -54,6 +54,7 @@ fun AddMoneyActionScreen(
      val contentState = viewModel.contentState.value
      val cardNumberState = viewModel.cardNumberState.value
      val priceState = viewModel.priceState.value
+     val dataState = viewModel.dateState.value
 
      LaunchedEffect(key1 = true) {
           viewModel.sharedFlow.collectLatest { event ->
@@ -121,8 +122,6 @@ fun AddMoneyActionScreen(
                                                   keyboardType = KeyboardType.Text,
                                              )
                                         }
-
-
                                    }
                                    Spacer(modifier = Modifier.height(40.dp))
                                    Box(modifier = Modifier.padding(bottom = 15.dp)) {

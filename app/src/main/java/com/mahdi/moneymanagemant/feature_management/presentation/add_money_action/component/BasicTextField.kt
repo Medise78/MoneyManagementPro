@@ -27,6 +27,7 @@ fun TextFieldCustom(
        textChange : (String) -> Unit ,
        labelText : String ,
        keyboardType : KeyboardType ,
+       modifier : Modifier = Modifier
 )
 {
       val keyboardController = LocalSoftwareKeyboardController.current
@@ -45,7 +46,7 @@ fun TextFieldCustom(
                   fontWeight = FontWeight.Normal ,
             ) ,
             label = { Text(text = labelText , color = Color.White.copy(0.5f)) } ,
-            modifier = Modifier
+            modifier = modifier
                   .background(Color.Transparent)
                   .fillMaxSize() ,
             colors = TextFieldDefaults.textFieldColors(

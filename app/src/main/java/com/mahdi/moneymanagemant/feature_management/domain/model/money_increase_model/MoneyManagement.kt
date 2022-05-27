@@ -10,6 +10,7 @@ data class MoneyManagement(
      val content: String,
      val color: Int,
      val price: String,
+     val date:String,
      val cardNumber: String,
      val timeStamp: Long,
      @PrimaryKey val id: Int? = null

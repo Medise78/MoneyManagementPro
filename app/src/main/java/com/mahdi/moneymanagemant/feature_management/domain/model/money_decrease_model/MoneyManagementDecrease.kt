@@ -10,6 +10,7 @@ data class MoneyManagementDecrease(
      val contentDecrease: String,
      val colorDecrease: Int,
      val priceDecrease: String,
+     val dateDecrease:String,
      val cardNumberDecrease: String,
      val timeStampDecrease: Long,
      @PrimaryKey val idDecrease: Int? = null

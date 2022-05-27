@@ -21,10 +21,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.navOptions
-import com.mahdi.moneymanagemant.feature_management.presentation.add_money_action.component.MyContent
-import com.mahdi.moneymanagemant.feature_management.presentation.add_money_action.component.RadioButtons
-import com.mahdi.moneymanagemant.feature_management.presentation.add_money_action.component.SaveButton
-import com.mahdi.moneymanagemant.feature_management.presentation.add_money_action.component.TextFieldCustom
+import com.mahdi.moneymanagemant.feature_management.presentation.add_money_action.component.*
 import com.mahdi.moneymanagemant.feature_management.presentation.money_actions.unit.RallyScreen
 import kotlinx.coroutines.flow.collectLatest
 
@@ -156,7 +153,7 @@ fun AddMoneyActionDecreaseScreen(
 
                                    }
                                    Spacer(modifier = Modifier.height(40.dp))
-                                   MyContent()
+                                   MyContentDecrease()
                                    Spacer(modifier = Modifier.height(40.dp))
                                    Box(modifier = Modifier.padding(bottom = 15.dp)) {
                                         Text(

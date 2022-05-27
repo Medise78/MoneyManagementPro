@@ -9,7 +9,6 @@ import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
 import com.mahdi.moneymanagemant.R
 import com.mahdi.moneymanagemant.feature_management.domain.model.money_decrease_model.MoneyManagementDecrease
-import com.mahdi.moneymanagemant.feature_management.presentation.money_actions.component.BillRow
 import com.mahdi.moneymanagemant.feature_management.presentation.money_actions.component.BillRowFake
 import com.mahdi.moneymanagemant.feature_management.presentation.money_actions.component.StatementBody
 

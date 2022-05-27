@@ -182,6 +182,7 @@ private fun <T> OverviewScreenCardAccounts(
      navController: NavController,
      viewModel: MoneyActionsViewModel = hiltViewModel(),
      title: String,
+     date:String,
      amount: Double,
      onClickSeeAll: () -> Unit,
      onClickAdd: () -> Unit,
@@ -212,6 +213,7 @@ private fun <T> OverviewScreenCardAccounts(
                                    style = MaterialTheme.typography.h2,
                                    modifier = Modifier.padding(top = 15.dp)
                               )
+
                          }
                          Box(
                               modifier = Modifier
@@ -476,7 +478,8 @@ private fun AccountsCard(
           colors = { Color(it.color) },
           values = { it.price.toFloat() },
           onClickAdd = onClickAdd,
-          onAccountClick = onAccountClick
+          onAccountClick = onAccountClick,
+          date = state.moneyActions.find { true }?.date.toString()
      ) { account ->
           AccountRowFake(
                modifier = Modifier.clickable { onAccountClick(account.id!!) },
