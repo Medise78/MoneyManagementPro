@@ -1,11 +1,7 @@
 package com.mahdi.moneymanagemant.feature_management.domain.model.money_increase_model
 
-import androidx.annotation.ColorInt
-import androidx.compose.ui.graphics.Color
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.mahdi.moneymanagemant.feature_management.data.radly_data.Account
-import com.mahdi.moneymanagemant.feature_management.data.radly_data.UserData
 import com.mahdi.moneymanagemant.ui.theme.*
 
 @Entity

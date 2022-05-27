@@ -9,6 +9,7 @@ import com.mahdi.moneymanagemant.feature_management.domain.model.money_increase_
 import com.mahdi.moneymanagemant.feature_management.domain.use_case.increase_use_case.MoneyActionUseCases
 import com.mahdi.moneymanagemant.feature_management.domain.util.MoneyManagementOrder
 import com.mahdi.moneymanagemant.feature_management.domain.util.OrderType
+import com.mahdi.moneymanagemant.feature_management.presentation.money_actions.unit.RallyScreen
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -54,7 +55,7 @@ class MoneyActionsViewModel @Inject constructor(
           }
      }
 
-     private fun getMoneyAction(moneyManagementOrder: MoneyManagementOrder) {
+     fun getMoneyAction(moneyManagementOrder: MoneyManagementOrder) {
           getMoneyManagementJob?.cancel()
           getMoneyManagementJob = moneyActionUseCases.getMoneyActionsUseCase(moneyManagementOrder)
                .onEach { moneyActions ->
@@ -63,6 +64,7 @@ class MoneyActionsViewModel @Inject constructor(
                     )
                }.launchIn(viewModelScope)
      }
+
 
      fun onItemExpanded(cardId: Int) {
           if (_revealedCardIdsList.value.contains(cardId)) return
@@ -73,7 +75,6 @@ class MoneyActionsViewModel @Inject constructor(
                launchSingleTop = true
                this.restoreState = true
                restoreState = true
-
           }
      }
 
@@ -86,6 +87,7 @@ class MoneyActionsViewModel @Inject constructor(
                launchSingleTop = true
                this.restoreState = true
                restoreState = true
+
           }
      }
 }

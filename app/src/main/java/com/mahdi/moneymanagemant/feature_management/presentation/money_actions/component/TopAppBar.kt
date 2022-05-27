@@ -45,6 +45,7 @@ import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.navigation.navOptions
 import com.mahdi.moneymanagemant.feature_management.presentation.money_actions.unit.RallyScreen
 import java.util.Locale
 
@@ -114,8 +115,10 @@ private fun RallyTab(
         if (selected) {
             Spacer(Modifier.width(12.dp))
             Text(text.uppercase(Locale.getDefault()), color = tabTintColor)
+
         }
     }
+
 }
 
 private val TabHeight = 56.dp

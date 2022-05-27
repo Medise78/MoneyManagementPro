@@ -26,9 +26,6 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.mahdi.moneymanagemant.R
-import com.mahdi.moneymanagemant.feature_management.data.radly_data.UserData
-import com.mahdi.moneymanagemant.feature_management.domain.model.money_decrease_model.MoneyManagementDecrease
-import com.mahdi.moneymanagemant.feature_management.domain.model.money_increase_model.MoneyManagement
 import com.mahdi.moneymanagemant.feature_management.presentation.money_actions.increase_screen.MoneyActionsViewModel
 import com.mahdi.moneymanagemant.feature_management.presentation.money_actions.component.*
 import com.mahdi.moneymanagemant.feature_management.presentation.money_actions.component.overview.component.ActionsRow
@@ -91,11 +88,11 @@ private fun AlertCard(
           .sumOf { it.priceDecrease.toDouble() }
      val priceInc =
           increaseState.moneyActions.filter { it.name.isNotBlank() }.sumOf { it.price.toDouble() }
-     val result = (priceInc - priceDec) / 1000
+     val result = priceDec
      val def = NumberFormat.getPercentInstance().format(result)
      var showDialog by remember { mutableStateOf(false) }
      val alertMessage =
-          "Heads up, you've used up ${def}  of your Shopping budget for this month."
+          "Heads up, you've saved ${result}  of your Shopping budget for this month."
 
      if (showDialog) {
           RallyAlertDialog(
@@ -469,7 +466,6 @@ private fun AccountsCard(
      viewModel: MoneyActionsViewModel = hiltViewModel()
 ) {
      val state = viewModel.state.value
-     val amount = UserData.accounts.map { account -> account.balance }.sum()
 
      OverviewScreenCardAccounts(
           navController = navController,
@@ -502,7 +498,7 @@ private fun BillsCard(
      navController: NavController,
 ) {
      val state = viewModel.state.value
-     val amount = UserData.bills.map { bill -> bill.amount }.sum()
+
      OverviewScreenCardBills(
           navController = navController,
           title = stringResource(R.string.bills),

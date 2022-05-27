@@ -12,6 +12,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
@@ -19,6 +20,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import androidx.navigation.navOptions
 import com.mahdi.moneymanagemant.feature_management.presentation.add_money_action.component.MyContent
 import com.mahdi.moneymanagemant.feature_management.presentation.add_money_action.component.RadioButtons
 import com.mahdi.moneymanagemant.feature_management.presentation.add_money_action.component.SaveButton
@@ -38,7 +40,7 @@ fun AddMoneyActionDecreaseScreen(
      val contentState = viewModel.contentState.value
      val priceState = viewModel.priceState.value
      val cardNumberState = viewModel.cardNumberState.value
-
+     val context = LocalContext.current
      LaunchedEffect(key1 = true) {
           viewModel.sharedFlow.collectLatest { event ->
                when (event) {
@@ -46,7 +48,8 @@ fun AddMoneyActionDecreaseScreen(
                          scaffoldState.snackbarHostState.showSnackbar(message = event.message)
                     }
                     is AddMoneyActionDecreaseViewModel.UiEventDecrease.SavedMoneyAction -> {
-                         navController.navigate(RallyScreen.Overview.name)
+                         navController.navigateUp()
+
                     }
                }
           }
@@ -83,12 +86,13 @@ fun AddMoneyActionDecreaseScreen(
                                    Card(
                                         modifier = Modifier
                                              .fillMaxWidth(0.85f)
-                                             .height(55.dp), RoundedCornerShape(15.dp), elevation = 5.dp
+                                             .height(60.dp), RoundedCornerShape(15.dp), elevation = 5.dp
                                    ) {
                                         Box(
                                              modifier = Modifier
                                                   .fillMaxSize()
-                                                  .background(Color(0xFFF8F8F8))
+                                                  .background(Color(0xFFF8F8F8)),
+                                             contentAlignment = Alignment.Center
                                         ) {
                                              TextFieldCustom(
                                                   labelText = "Enter Title" ,
@@ -101,7 +105,6 @@ fun AddMoneyActionDecreaseScreen(
                                                        )
                                                   } ,
                                                   keyboardType = KeyboardType.Text ,
-                                                  vector = Icons.Default.AttachMoney ,
                                              )
                                         }
                                    }
@@ -128,14 +131,15 @@ fun AddMoneyActionDecreaseScreen(
                                         Card(
                                              modifier = Modifier
                                                   .fillMaxWidth(0.85f)
-                                                  .height(55.dp),
+                                                  .height(60.dp),
                                              RoundedCornerShape(15.dp),
                                              elevation = 5.dp
                                         ) {
                                              Box(
                                                   modifier = Modifier
                                                        .fillMaxSize()
-                                                       .background(Color(0xFFF8F8F8))
+                                                       .background(Color(0xFFF8F8F8)),
+                                                  contentAlignment = Alignment.Center
                                              ) {
                                                   TextFieldCustom(
                                                        labelText = "Enter Price...",
@@ -146,7 +150,6 @@ fun AddMoneyActionDecreaseScreen(
                                                             )
                                                        },
                                                        keyboardType = KeyboardType.Number,
-                                                       vector = Icons.Default.AttachMoney
                                                   )
                                              }
                                         }
@@ -166,12 +169,13 @@ fun AddMoneyActionDecreaseScreen(
                                    Card(
                                         modifier = Modifier
                                              .fillMaxWidth(0.85f)
-                                             .height(55.dp), RoundedCornerShape(15.dp), elevation = 5.dp
+                                             .height(60.dp), RoundedCornerShape(15.dp), elevation = 5.dp
                                    ) {
                                         Box(
                                              modifier = Modifier
                                                   .fillMaxSize()
-                                                  .background(Color(0xFFF8F8F8))
+                                                  .background(Color(0xFFF8F8F8)),
+                                             contentAlignment = Alignment.Center
                                         ) {
                                              TextFieldCustom(
                                                   labelText = "Enter Description...",
@@ -184,7 +188,6 @@ fun AddMoneyActionDecreaseScreen(
                                                        )
                                                   },
                                                   keyboardType = KeyboardType.Text,
-                                                  vector = Icons.Default.AttachMoney
                                              )
                                         }
                                    }
@@ -200,12 +203,13 @@ fun AddMoneyActionDecreaseScreen(
                                    Card(
                                         modifier = Modifier
                                              .fillMaxWidth(0.85f)
-                                             .height(55.dp), RoundedCornerShape(15.dp), elevation = 5.dp
+                                             .height(60.dp), RoundedCornerShape(15.dp), elevation = 5.dp
                                    ) {
                                         Box(
                                              modifier = Modifier
                                                   .fillMaxSize()
-                                                  .background(Color(0xFFF8F8F8))
+                                                  .background(Color(0xFFF8F8F8)),
+                                             contentAlignment = Alignment.Center
                                         ) {
                                              TextFieldCustom(
                                                   labelText = "Enter Card Number...",
@@ -218,7 +222,6 @@ fun AddMoneyActionDecreaseScreen(
                                                        )
                                                   },
                                                   keyboardType = KeyboardType.Number,
-                                                  vector = Icons.Default.AttachMoney
                                              )
                                         }
                                    }

@@ -12,15 +12,10 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavHostController
-import androidx.navigation.NavType
+import androidx.navigation.*
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import androidx.navigation.navArgument
-import androidx.navigation.navDeepLink
-import com.mahdi.moneymanagemant.feature_management.data.radly_data.UserData
 import com.mahdi.moneymanagemant.feature_management.presentation.add_money_action.decrease_screen.AddMoneyActionDecreaseScreen
 import com.mahdi.moneymanagemant.feature_management.presentation.add_money_action.increaseScreen.AddMoneyActionScreen
 import com.mahdi.moneymanagemant.feature_management.presentation.money_actions.component.RallyTabRow
@@ -38,6 +33,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+
      override fun onCreate(savedInstanceState: Bundle?) {
           super.onCreate(savedInstanceState)
           setContent {
@@ -64,7 +60,9 @@ fun RallyApp() {
                          allScreens = allScreens,
                          onTabSelected = { screen ->
                               currentScreen = screen
-                              navController.navigate(screen.name)
+                              navController.navigate(screen.name){
+                                   navController.popBackStack()
+                              }
                          },
                          currentScreen = currentScreen
                     )
@@ -183,9 +181,13 @@ fun RallyNavHost(
 }
 
 private fun navigateToSingleAccount(navController: NavHostController, accountId: Int) {
-     navController.navigate("${RallyScreen.Accounts.name}/$accountId")
+     navController.navigate("${RallyScreen.Accounts.name}/$accountId"){
+          navController.popBackStack()
+     }
 }
 
 private fun navigateToSingleBills(navController: NavHostController, accountId: Int) {
-     navController.navigate("${RallyScreen.Bills.name}/$accountId")
+     navController.navigate("${RallyScreen.Bills.name}/$accountId"){
+          navController.popBackStack()
+     }
 }

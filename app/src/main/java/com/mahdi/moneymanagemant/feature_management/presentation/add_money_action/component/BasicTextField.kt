@@ -26,13 +26,10 @@ fun TextFieldCustom(
        text : String ,
        textChange : (String) -> Unit ,
        labelText : String ,
-       vector : ImageVector ,
        keyboardType : KeyboardType ,
 )
 {
       val keyboardController = LocalSoftwareKeyboardController.current
-
-
 
       TextField(
             value = text ,
