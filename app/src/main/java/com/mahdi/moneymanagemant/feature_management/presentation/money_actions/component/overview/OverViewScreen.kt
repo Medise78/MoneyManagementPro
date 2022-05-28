@@ -1,5 +1,6 @@
 package com.mahdi.moneymanagemant.feature_management.presentation.money_actions.component.overview
 
+import android.annotation.SuppressLint
 import android.icu.number.NumberFormatter
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExperimentalAnimationApi
@@ -38,6 +39,7 @@ import com.mahdi.moneymanagemant.feature_management.presentation.util.Screen
 import java.text.NumberFormat
 import java.util.Locale
 
+@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun OverviewBody(

@@ -6,9 +6,9 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Button
-import androidx.compose.material.Card
-import androidx.compose.material.Text
+import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.CalendarMonth
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -34,10 +34,10 @@ import java.util.*
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun MyContentDecrease(
-       addMoneyActionViewModel : AddMoneyActionDecreaseViewModel = hiltViewModel() ,
+       addMoneyActionDecViewModel : AddMoneyActionDecreaseViewModel = hiltViewModel() ,
 ) {
 
-      var state = addMoneyActionViewModel.dateState.value
+      var state = addMoneyActionDecViewModel.dateState.value
 
       val mContext = LocalContext.current
 
@@ -70,36 +70,53 @@ fun MyContentDecrease(
                         fontWeight = FontWeight.ExtraBold
                   )
             }
-            Button(onClick = { mDatePickerDialog.show() }) {
-
-            }
             Card(
                   modifier = Modifier
                         .fillMaxWidth(0.85f)
                         .clickable(onClick = {
                               mDatePickerDialog.show()
                         })
-                        .height(55.dp) , RoundedCornerShape(15.dp) , elevation = 5.dp
+                        .height(55.dp), RoundedCornerShape(15.dp), elevation = 5.dp
             ) {
-                  Box(
-                        modifier = Modifier
-                              .fillMaxSize()
-                              .background(Color(0xFF6B6969))
-                  ) {
+                  Row(horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
+                        Box(
+                              modifier = Modifier
+                                    .fillMaxSize()
+                                    .weight(4f)
+                                    .background(Color(0xFF6B6969))
+                        ) {
+                              Box(
+                                    modifier = Modifier.matchParentSize(),
+                                    contentAlignment = Alignment.Center
+                              ) {
+                                    state.text =  mDate.value
 
-                        Box(modifier = Modifier.matchParentSize(), contentAlignment = Alignment.Center) {
-                              state.text = if (mDate.value == ""  ) "Open Date Picker" else "${mDate.value}"
-                              TextFieldCustom(
-                                    labelText = "" ,
-                                    text = state.text,
-                                    textChange = {
-                                          addMoneyActionViewModel.onEvent(
-                                                AddMoneyActionDecreaseEvent.Date(it)
-                                          )
-                                    } ,
-                                    keyboardType = KeyboardType.Number ,
-                              )
+                                    TextFieldCustom(
+                                          labelText = "Select Date",
+                                          text = state.text,
+                                          textChange = {
+                                                addMoneyActionDecViewModel.onEvent(
+                                                      AddMoneyActionDecreaseEvent.Date(it)
+                                                )
+                                          },
+                                          keyboardType = KeyboardType.Ascii,
+                                          modifier = Modifier.clickable(onClick = {
+                                                mDatePickerDialog.datePicker.showContextMenu()
+                                          } )
+                                    )
+                              }
                         }
+                        Box(
+                              modifier = Modifier
+                                    .fillMaxHeight()
+                                    .weight(1f)
+                                    .background(Color(0xFF6B6969))
+                        ) {
+                              Button(modifier = Modifier.fillMaxSize(),
+                                    colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF6B6969)),
+                                    onClick = { mDatePickerDialog.show() }) {
+                                    Icon(Icons.Default.CalendarMonth, contentDescription ="" )
+                              }}
                   }
             }
       }

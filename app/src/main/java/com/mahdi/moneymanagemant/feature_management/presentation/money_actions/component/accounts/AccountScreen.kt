@@ -34,7 +34,7 @@ fun AccountsBody(
                     },
                     moneyManagement = account
                )
-          }
+          },
      )
 }
 
