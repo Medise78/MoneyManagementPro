@@ -6,7 +6,7 @@ import com.mahdi.moneymanagemant.feature_management.domain.model.money_increase_
 
 @Database(
      entities = [MoneyManagement::class],
-     version = 3,
+     version = 4,
      exportSchema = false
 )
 abstract class MoneyManagementDataBase : RoomDatabase() {

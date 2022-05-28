@@ -1,5 +1,6 @@
 package com.mahdi.moneymanagemant.feature_management.presentation.add_money_action.decrease_screen
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -21,6 +22,7 @@ import androidx.navigation.NavController
 import com.mahdi.moneymanagemant.feature_management.presentation.add_money_action.component.*
 import kotlinx.coroutines.flow.collectLatest
 
+@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @ExperimentalComposeUiApi
 @Composable
 fun AddMoneyActionDecreaseScreen(
