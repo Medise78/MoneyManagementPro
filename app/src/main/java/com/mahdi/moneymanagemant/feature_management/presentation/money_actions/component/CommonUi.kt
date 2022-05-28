@@ -149,9 +149,9 @@ private fun BaseRowFake(
                 }
             }
             }
-                Box(modifier = Modifier.fillMaxHeight().padding(10.dp)) {
-                    Expand(text = description)
-                }
+//                Box(modifier = Modifier.fillMaxHeight().padding(10.dp)) {
+////                    Expand(text = description)
+//                }
     }
     RallyDivider()
 }
@@ -283,27 +283,4 @@ fun <E> List<E>.extractProportions(selector: (E) -> Float): List<Float> {
     val total = this.sumOf { selector(it).toDouble() }
     return this.map { (selector(it) / total).toFloat() }
 }
-@Composable
-fun Expand(
-    text:String
-){
-    Column(Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center) {
-
-        var showMore by remember { mutableStateOf(false) }
-
-            Column(modifier = Modifier
-                .animateContentSize(animationSpec = tween(200))
-                .clickable(
-                    interactionSource = remember { MutableInteractionSource() },
-                    indication = null
-                ) { showMore = !showMore }) {
-
-                if (showMore) {
-                    Text(text = text ,style = typography.body1,)
-                } else {
-                    Text(text = text ,style = typography.body1, maxLines = 1, overflow = TextOverflow.Ellipsis)
-                }
-            }
-        }
-    }
 

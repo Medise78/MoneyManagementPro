@@ -35,6 +35,7 @@ fun AccountsBody(
                     moneyManagement = account
                )
           },
+          description = accounts.map { accounts -> accounts.content }.toString()
      )
 }
 
@@ -49,6 +50,7 @@ fun SingleAccountBody(account: MoneyManagement) {
           amounts = { account.price.toFloat() },
           amountsTotal = account.price.toFloat(),
           circleLabel = account.name,
+          description = account.content
      ) { row ->
           AccountRowFake(
                moneyManagement = row
