@@ -46,9 +46,7 @@ fun AccountRowFake(
         modifier = modifier,
         color = Color(moneyManagement.color),
         title = moneyManagement.name,
-        subtitle = stringResource(R.string.account_redacted) + AccountDecimalFormat.format(
-            moneyManagement.cardNumber.toInt()
-        ),
+        subtitle = moneyManagement.cardNumber,
         amount = moneyManagement.price.toFloat(),
         negative = false,
         date = moneyManagement.date,
@@ -256,7 +254,7 @@ fun formatAmount(amount: Float): String {
     return AmountDecimalFormat.format(amount)
 }
 
-private val AccountDecimalFormat = DecimalFormat("####")
+private val AccountDecimalFormat = DecimalFormat("################")
 private val AmountDecimalFormat = DecimalFormat("#,###.##")
 
 /**

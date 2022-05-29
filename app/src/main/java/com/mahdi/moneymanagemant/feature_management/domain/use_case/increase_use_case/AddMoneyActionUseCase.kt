@@ -13,11 +13,17 @@ class AddMoneyActionUseCase(
           if (moneyManagement.name.isBlank()) {
                throw InvalidException("Set Title")
           }
+          if (moneyManagement.name.length > 15){
+               throw InvalidException("long Title")
+          }
           if (moneyManagement.content.isBlank()) {
                throw InvalidException("Set Content")
           }
           if (moneyManagement.cardNumber.isBlank()) {
                throw InvalidException("Set Card Number")
+          }
+          if (moneyManagement.cardNumber.length < 16 || moneyManagement.cardNumber.length >16){
+               throw InvalidException("CardNumber Should be 16 character")
           }
           if (moneyManagement.price.isBlank()) {
                throw InvalidException("Set Price")
