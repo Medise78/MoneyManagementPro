@@ -78,7 +78,7 @@ fun SingleAccountRow(
             modifier = modifier ,
             color = Color(moneyManagement.color) ,
             title = moneyManagement.name ,
-            subtitle = moneyManagement.cardNumber ,
+            subtitle = moneyManagement.content ,
             amount = moneyManagement.price.toFloat() ,
             negative = false ,
             date = moneyManagement.date ,
