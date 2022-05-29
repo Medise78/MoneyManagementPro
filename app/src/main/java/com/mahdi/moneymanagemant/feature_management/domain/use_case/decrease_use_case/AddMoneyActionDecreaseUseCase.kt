@@ -14,8 +14,17 @@ class AddMoneyActionDecreaseUseCase(
           if (moneyManagementDecrease.nameDecrease.isBlank()) {
                throw InvalidException("Set Title")
           }
+          if (moneyManagementDecrease.nameDecrease.length > 15){
+               throw InvalidException("long Title")
+          }
           if (moneyManagementDecrease.contentDecrease.isBlank()) {
                throw InvalidException("Set Content")
+          }
+          if (moneyManagementDecrease.cardNumberDecrease.isBlank()) {
+               throw InvalidException("Set Card Number")
+          }
+          if (moneyManagementDecrease.cardNumberDecrease.length < 16 || moneyManagementDecrease.cardNumberDecrease.length >16){
+               throw InvalidException("CardNumber Should be 16 character")
           }
           if (moneyManagementDecrease.priceDecrease.isBlank()) {
                throw InvalidException("Set Price")
