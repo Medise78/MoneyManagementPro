@@ -16,34 +16,19 @@
 
 package com.mahdi.moneymanagemant.feature_management.presentation.money_actions.component
 
-import androidx.compose.animation.animateContentSize
-import androidx.compose.animation.core.animateFloatAsState
-import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
-import androidx.compose.material.MaterialTheme.typography
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ChevronRight
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
-import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.geometry.Rect
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
-import androidx.compose.ui.text.TextLayoutResult
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.mahdi.moneymanagemant.R
@@ -157,7 +142,7 @@ private fun BaseRowFake(
 }
 
 @Composable
-private fun AccountIndicatorFake(color: Color, modifier: Modifier = Modifier) {
+fun AccountIndicatorFake(color: Color, modifier: Modifier = Modifier) {
     Spacer(
         modifier
             .size(4.dp, 36.dp)
@@ -174,9 +159,7 @@ fun BillRowFake(
         modifier = modifier,
         color = Color(moneyManagementDecrease.colorDecrease),
         title = moneyManagementDecrease.nameDecrease,
-        subtitle = stringResource(R.string.account_redacted) + AccountDecimalFormat.format(
-            moneyManagementDecrease.cardNumberDecrease.toInt()
-        ),
+        subtitle = moneyManagementDecrease.cardNumberDecrease ,
         amount = moneyManagementDecrease.priceDecrease.toFloat(),
         negative = true,
         date = moneyManagementDecrease.dateDecrease,

@@ -207,7 +207,7 @@ fun AddMoneyActionDecreaseScreen(
                                              contentAlignment = Alignment.Center
                                         ) {
                                              TextFieldCustom(
-                                                  labelText = "Enter Card Number...",
+                                                  labelText = "Description...",
                                                   text = cardNumberState.text,
                                                   textChange = {
                                                        viewModel.onEvent(
@@ -216,7 +216,7 @@ fun AddMoneyActionDecreaseScreen(
                                                             )
                                                        )
                                                   },
-                                                  keyboardType = KeyboardType.Number,
+                                                  keyboardType = KeyboardType.Text,
                                              )
                                         }
                                    }
