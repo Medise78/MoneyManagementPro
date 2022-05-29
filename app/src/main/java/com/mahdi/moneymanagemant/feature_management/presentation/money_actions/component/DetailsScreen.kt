@@ -33,9 +33,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 
-/**
- * Generic component used by the accounts and bills screens to show a chart and a list of items.
- */
+
 @Composable
 fun <T> StatementBody(
     modifier: Modifier = Modifier,
@@ -76,7 +74,6 @@ fun <T> StatementBody(
             Column(modifier = Modifier.padding(12.dp)) {
                 items.forEach { item ->
                     rows(item)
-
                 }
             }
         }

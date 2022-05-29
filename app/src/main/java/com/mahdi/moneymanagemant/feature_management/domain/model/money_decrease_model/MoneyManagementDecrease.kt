@@ -15,10 +15,8 @@ data class MoneyManagementDecrease(
      val timeStampDecrease: Long,
      @PrimaryKey val idDecrease: Int? = null
 ) {
-     //har ja estefade beshe chandta element ba khodesh dare
      companion object {
           val colorsDecrease = listOf(RedOrange, LightGreen, Violet, BabyBlue)
      }
 }
-
 class InvalidExceptionDecrease(message: String) : Exception(message)

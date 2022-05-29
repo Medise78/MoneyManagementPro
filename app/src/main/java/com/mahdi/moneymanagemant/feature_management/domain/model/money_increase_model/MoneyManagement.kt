@@ -15,10 +15,8 @@ data class MoneyManagement(
      val timeStamp: Long,
      @PrimaryKey val id: Int? = null
 ) {
-     //har ja estefade beshe chandta element ba khodesh dare
      companion object {
           val colors = listOf(RedOrange, LightGreen, Violet, BabyBlue)
      }
 }
-
 class InvalidException(message: String) : Exception(message)

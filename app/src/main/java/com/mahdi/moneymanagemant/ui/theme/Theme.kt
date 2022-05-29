@@ -44,12 +44,8 @@ private val RobotoCondensed = FontFamily(
      Font(R.font.robotocondensed_bold, FontWeight.Bold)
 )
 
-/**
- * A [MaterialTheme] for Rally.
- */
 @Composable
 fun RallyTheme(content: @Composable () -> Unit) {
-     // Rally is always dark themed.
      val colors = darkColors(
           primary = Green500,
           surface = DarkBlue900,
@@ -129,19 +125,14 @@ fun RallyTheme(content: @Composable () -> Unit) {
      MaterialTheme(colors = colors, typography = typography, content = content)
 }
 
-/**
- * A theme overlay used for dialogs.
- */
 @Composable
 fun RallyDialogThemeOverlay(content: @Composable () -> Unit) {
-     // Rally is always dark themed.
      val dialogColors = darkColors(
           primary = Color.White,
           surface = Color.White.copy(alpha = 0.12f).compositeOver(Color.Black),
           onSurface = Color.White
      )
 
-     // Copy the current [Typography] and replace some text styles for this theme.
      val currentTypography = MaterialTheme.typography
      val dialogTypography = currentTypography.copy(
           body2 = currentTypography.body1.copy(

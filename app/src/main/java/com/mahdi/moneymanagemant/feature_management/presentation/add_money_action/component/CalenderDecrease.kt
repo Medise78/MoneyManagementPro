@@ -30,94 +30,97 @@ import com.mahdi.moneymanagemant.feature_management.presentation.add_money_actio
 import java.util.*
 
 
-
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun MyContentDecrease(
-       addMoneyActionDecViewModel : AddMoneyActionDecreaseViewModel = hiltViewModel() ,
+    addMoneyActionDecViewModel: AddMoneyActionDecreaseViewModel = hiltViewModel(),
 ) {
 
-      var state = addMoneyActionDecViewModel.dateState.value
+    var state = addMoneyActionDecViewModel.dateState.value
 
-      val mContext = LocalContext.current
+    val mContext = LocalContext.current
 
-      val mYear: Int
-      val mMonth: Int
-      val mDay: Int
+    val mYear: Int
+    val mMonth: Int
+    val mDay: Int
 
-      val mCalendar = Calendar.getInstance()
+    val mCalendar = Calendar.getInstance()
 
-      mYear = mCalendar.get(Calendar.YEAR)
-      mMonth = mCalendar.get(Calendar.MONTH)
-      mDay = mCalendar.get(Calendar.DAY_OF_MONTH)
+    mYear = mCalendar.get(Calendar.YEAR)
+    mMonth = mCalendar.get(Calendar.MONTH)
+    mDay = mCalendar.get(Calendar.DAY_OF_MONTH)
 
-      mCalendar.time = Date()
+    mCalendar.time = Date()
 
-      val mDate = remember { mutableStateOf("") }
+    val mDate = remember { mutableStateOf("") }
 
-      val mDatePickerDialog = DatePickerDialog(
-            mContext,
-            { _: DatePicker , mYear: Int , mMonth: Int , mDayOfMonth: Int ->
-                  mDate.value = "$mDayOfMonth/${mMonth + 1}/$mYear"
-            }, mYear, mMonth, mDay
-      )
-      Column {
-            Box(modifier = Modifier.padding(bottom = 15.dp)) {
-                  Text(
-                        text = "Set Date & Time :",
-                        fontFamily = FontFamily.SansSerif,
-                        fontSize = 14.sp,
-                        fontWeight = FontWeight.ExtraBold
-                  )
-            }
-            Card(
-                  modifier = Modifier
-                        .fillMaxWidth(0.85f)
-                        .clickable(onClick = {
-                              mDatePickerDialog.show()
-                        })
-                        .height(55.dp), RoundedCornerShape(15.dp), elevation = 5.dp
+    val mDatePickerDialog = DatePickerDialog(
+        mContext,
+        { _: DatePicker, mYear: Int, mMonth: Int, mDayOfMonth: Int ->
+            mDate.value = "$mDayOfMonth/${mMonth + 1}/$mYear"
+        }, mYear, mMonth, mDay
+    )
+    Column {
+        Box(modifier = Modifier.padding(bottom = 15.dp)) {
+            Text(
+                text = "Set Date & Time :",
+                fontFamily = FontFamily.SansSerif,
+                fontSize = 14.sp,
+                fontWeight = FontWeight.ExtraBold
+            )
+        }
+        Card(
+            modifier = Modifier
+                  .fillMaxWidth(0.85f)
+                  .clickable(onClick = {
+                        mDatePickerDialog.show()
+                  })
+                  .height(55.dp), RoundedCornerShape(15.dp), elevation = 5.dp
+        ) {
+            Row(
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
             ) {
-                  Row(horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
-                        Box(
-                              modifier = Modifier
-                                    .fillMaxSize()
-                                    .weight(4f)
-                                    .background(Color(0xFF6B6969))
-                        ) {
-                              Box(
-                                    modifier = Modifier.matchParentSize(),
-                                    contentAlignment = Alignment.Center
-                              ) {
-                                    state.text =  mDate.value
+                Box(
+                    modifier = Modifier
+                          .fillMaxSize()
+                          .weight(4f)
+                          .background(Color(0xFF6B6969))
+                ) {
+                    Box(
+                        modifier = Modifier.matchParentSize(),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        state.text = mDate.value
 
-                                    TextFieldCustom(
-                                          labelText = "Select Date",
-                                          text = state.text,
-                                          textChange = {
-                                                addMoneyActionDecViewModel.onEvent(
-                                                      AddMoneyActionDecreaseEvent.Date(it)
-                                                )
-                                          },
-                                          keyboardType = KeyboardType.Ascii,
-                                          modifier = Modifier.clickable(onClick = {
-                                                mDatePickerDialog.datePicker.showContextMenu()
-                                          } )
-                                    )
-                              }
-                        }
-                        Box(
-                              modifier = Modifier
-                                    .fillMaxHeight()
-                                    .weight(1f)
-                                    .background(Color(0xFF6B6969))
-                        ) {
-                              Button(modifier = Modifier.fillMaxSize(),
-                                    colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF6B6969)),
-                                    onClick = { mDatePickerDialog.show() }) {
-                                    Icon(Icons.Default.CalendarMonth, contentDescription ="" )
-                              }}
-                  }
+                        TextFieldCustom(
+                            labelText = "Select Date",
+                            text = state.text,
+                            textChange = {
+                                addMoneyActionDecViewModel.onEvent(
+                                    AddMoneyActionDecreaseEvent.Date(it)
+                                )
+                            },
+                            keyboardType = KeyboardType.Ascii,
+                            modifier = Modifier.clickable(onClick = {
+                                mDatePickerDialog.datePicker.showContextMenu()
+                            })
+                        )
+                    }
+                }
+                Box(
+                    modifier = Modifier
+                          .fillMaxHeight()
+                          .weight(1f)
+                          .background(Color(0xFF6B6969))
+                ) {
+                    Button(modifier = Modifier.fillMaxSize(),
+                        colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF6B6969)),
+                        onClick = { mDatePickerDialog.show() }) {
+                        Icon(Icons.Default.CalendarMonth, contentDescription = "")
+                    }
+                }
             }
-      }
+        }
+    }
 }

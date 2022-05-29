@@ -23,42 +23,41 @@ import kotlinx.coroutines.launch
 @ExperimentalAnimationApi
 @Composable
 fun ActionsRow(
-     actionIconSize: Dp,
-     onDelete: () -> Unit,
-     onEdit: () -> Unit,
+    actionIconSize: Dp,
+    onDelete: () -> Unit,
+    onEdit: () -> Unit,
 ) {
-     Row(Modifier.padding(horizontal = 16.dp, vertical = 8.dp)) {
-          AnimatedVisibility(visible = true, enter = fadeIn(), exit = fadeOut()) {
-               IconButton(
-                    modifier = Modifier
-                         .size(actionIconSize)
-                         .animateEnterExit(
-                              slideInVertically(),
-                              slideOutVertically(),
-                         ),
-                    onClick = {
-                         onDelete()
-                    },
-                    content = {
-                         Icon(
-                              imageVector = Icons.Default.Delete,
-                              tint = Color.Gray,
-                              contentDescription = "delete action",
-                         )
-                    }
-               )
-          }
-
-          IconButton(
-               modifier = Modifier.size(actionIconSize),
-               onClick = onEdit,
-               content = {
+    Row(Modifier.padding(horizontal = 16.dp, vertical = 8.dp)) {
+        AnimatedVisibility(visible = true, enter = fadeIn(), exit = fadeOut()) {
+            IconButton(
+                modifier = Modifier
+                     .size(actionIconSize)
+                     .animateEnterExit(
+                          slideInVertically(),
+                          slideOutVertically(),
+                     ),
+                onClick = {
+                    onDelete()
+                },
+                content = {
                     Icon(
-                         imageVector = Icons.Default.Edit,
-                         tint = Color.Gray,
-                         contentDescription = "edit action",
+                        imageVector = Icons.Default.Delete,
+                        tint = Color.Gray,
+                        contentDescription = "delete action",
                     )
-               }
-          )
-     }
+                }
+            )
+        }
+        IconButton(
+            modifier = Modifier.size(actionIconSize),
+            onClick = onEdit,
+            content = {
+                Icon(
+                    imageVector = Icons.Default.Edit,
+                    tint = Color.Gray,
+                    contentDescription = "edit action",
+                )
+            }
+        )
+    }
 }

@@ -23,39 +23,40 @@ import androidx.compose.ui.unit.sp
 @ExperimentalComposeUiApi
 @Composable
 fun TextFieldCustom(
-       text : String ,
-       textChange : (String) -> Unit ,
-       labelText : String ,
-       keyboardType : KeyboardType ,
-       modifier : Modifier = Modifier
-)
-{
-      val keyboardController = LocalSoftwareKeyboardController.current
+    text: String,
+    textChange: (String) -> Unit,
+    labelText: String,
+    keyboardType: KeyboardType,
+    modifier: Modifier = Modifier
+) {
+    val keyboardController = LocalSoftwareKeyboardController.current
 
-      TextField(
-            value = text ,
-            onValueChange = textChange ,
-            keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done ,
-                                              keyboardType = keyboardType) ,
-            keyboardActions = KeyboardActions(onDone = { keyboardController?.hide() }) ,
-            maxLines = 1 ,
-            textStyle = TextStyle(
-                  color = Color.White ,
-                  textAlign = TextAlign.Start ,
-                  fontSize = 18.sp ,
-                  fontWeight = FontWeight.Normal ,
-            ) ,
-            label = { Text(text = labelText , color = Color.White.copy(0.5f)) } ,
-            modifier = modifier
-                  .background(Color.Transparent)
-                  .fillMaxSize() ,
-            colors = TextFieldDefaults.textFieldColors(
-                  textColor = Color.White ,
-                  disabledTextColor = Color(0xFF6B6969) ,
-                  backgroundColor = Color(0xFF6B6969) ,
-                  focusedIndicatorColor = Color(0xFF6B6969) ,
-                  unfocusedIndicatorColor = Color(0xFF6B6969) ,
-                  disabledIndicatorColor = Color(0xFF6B6969)
-            )
-      )
+    TextField(
+        value = text,
+        onValueChange = textChange,
+        keyboardOptions = KeyboardOptions(
+            imeAction = ImeAction.Done,
+            keyboardType = keyboardType
+        ),
+        keyboardActions = KeyboardActions(onDone = { keyboardController?.hide() }),
+        maxLines = 1,
+        textStyle = TextStyle(
+            color = Color.White,
+            textAlign = TextAlign.Start,
+            fontSize = 18.sp,
+            fontWeight = FontWeight.Normal,
+        ),
+        label = { Text(text = labelText, color = Color.White.copy(0.5f)) },
+        modifier = modifier
+              .background(Color.Transparent)
+              .fillMaxSize(),
+        colors = TextFieldDefaults.textFieldColors(
+            textColor = Color.White,
+            disabledTextColor = Color(0xFF6B6969),
+            backgroundColor = Color(0xFF6B6969),
+            focusedIndicatorColor = Color(0xFF6B6969),
+            unfocusedIndicatorColor = Color(0xFF6B6969),
+            disabledIndicatorColor = Color(0xFF6B6969)
+        )
+    )
 }

@@ -74,7 +74,10 @@ fun MyContent(
                 })
                 .height(55.dp), RoundedCornerShape(15.dp), elevation = 5.dp
         ) {
-            Row(horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
+            Row(
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
                 Box(
                     modifier = Modifier
                         .fillMaxSize()
@@ -85,7 +88,7 @@ fun MyContent(
                         modifier = Modifier.matchParentSize(),
                         contentAlignment = Alignment.Center
                     ) {
-                        state.text =  mDate.value
+                        state.text = mDate.value
 
                         TextFieldCustom(
                             labelText = "Select Date",
@@ -98,7 +101,7 @@ fun MyContent(
                             keyboardType = KeyboardType.Ascii,
                             modifier = Modifier.clickable(onClick = {
                                 mDatePickerDialog.datePicker.showContextMenu()
-                            } )
+                            })
                         )
                     }
                 }
@@ -108,11 +111,12 @@ fun MyContent(
                         .weight(1f)
                         .background(Color(0xFF6B6969))
                 ) {
-                Button(modifier = Modifier.fillMaxSize(),
-                    colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF6B6969)),
-                    onClick = { mDatePickerDialog.show() }) {
-                Icon(Icons.Default.CalendarMonth, contentDescription ="" )
-                }}
+                    Button(modifier = Modifier.fillMaxSize(),
+                        colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF6B6969)),
+                        onClick = { mDatePickerDialog.show() }) {
+                        Icon(Icons.Default.CalendarMonth, contentDescription = "")
+                    }
+                }
             }
         }
     }

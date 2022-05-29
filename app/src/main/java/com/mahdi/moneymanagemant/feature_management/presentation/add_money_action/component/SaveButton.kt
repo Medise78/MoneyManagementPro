@@ -17,19 +17,27 @@ import com.mahdi.moneymanagemant.feature_management.presentation.add_money_actio
 import com.mahdi.moneymanagemant.feature_management.presentation.add_money_action.decrease_screen.AddMoneyActionDecreaseViewModel
 
 @Composable
-fun SaveButton(viewModel: AddMoneyActionDecreaseViewModel = hiltViewModel()){
-      Box(modifier = Modifier
-            .fillMaxHeight()
-            .fillMaxWidth(0.85f).offset(y = 20.dp) , contentAlignment = Alignment.TopCenter) {
-            Card(modifier = Modifier.fillMaxSize(), RoundedCornerShape(35.dp) ) {
-                  Box(modifier = Modifier
-                        .fillMaxWidth()
-                        .clickable {
-                              viewModel.onEvent(AddMoneyActionDecreaseEvent.SavedActionDecrease)
-                        } , contentAlignment = Alignment.Center) {
-                        Text(text = "Save" , fontWeight = FontWeight.Bold , fontSize = 20.sp , color = Color.White)
-                  }
-
+fun SaveButton(viewModel: AddMoneyActionDecreaseViewModel = hiltViewModel()) {
+    Box(
+        modifier = Modifier
+              .fillMaxHeight()
+              .fillMaxWidth(0.85f)
+              .offset(y = 20.dp), contentAlignment = Alignment.TopCenter
+    ) {
+        Card(modifier = Modifier.fillMaxSize(), RoundedCornerShape(35.dp)) {
+            Box(modifier = Modifier
+                  .fillMaxWidth()
+                  .clickable {
+                        viewModel.onEvent(AddMoneyActionDecreaseEvent.SavedActionDecrease)
+                  }, contentAlignment = Alignment.Center) {
+                Text(
+                    text = "Save",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 20.sp,
+                    color = Color.White
+                )
             }
-      }
+
+        }
+    }
 }

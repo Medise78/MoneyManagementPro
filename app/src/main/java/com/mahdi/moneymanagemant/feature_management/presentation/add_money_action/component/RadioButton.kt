@@ -22,91 +22,90 @@ import com.mahdi.moneymanagemant.feature_management.presentation.add_money_actio
 
 
 @Composable
-fun RadioButtons(viewModel : AddMoneyActionDecreaseViewModel = hiltViewModel())
-{
-      val radioOption = listOf("Entertainment" , "Social & LifeStyle" , "Beauty & Health" , "Other")
-      Box(
-            modifier = Modifier
-                  .height(300.dp)
-                  .fillMaxWidth(0.85f)
-      ) {
-            Card(
-                  modifier = Modifier.fillMaxSize() ,
-                  RoundedCornerShape(25.dp) , elevation = 5.dp
-            ) {
-                  Row(modifier = Modifier.fillMaxSize()) {
-                        Column(
-                              modifier = Modifier
-                                    .fillMaxWidth(0.1f)
-                                    .fillMaxHeight()
-                                    .weight(1f) ,
-                              verticalArrangement = Arrangement.SpaceAround ,
-                              horizontalAlignment = Alignment.CenterHorizontally
+fun RadioButtons(viewModel: AddMoneyActionDecreaseViewModel = hiltViewModel()) {
+    val radioOption = listOf("Entertainment", "Social & LifeStyle", "Beauty & Health", "Other")
+    Box(
+        modifier = Modifier
+              .height(300.dp)
+              .fillMaxWidth(0.85f)
+    ) {
+        Card(
+            modifier = Modifier.fillMaxSize(),
+            RoundedCornerShape(25.dp), elevation = 5.dp
+        ) {
+            Row(modifier = Modifier.fillMaxSize()) {
+                Column(
+                    modifier = Modifier
+                          .fillMaxWidth(0.1f)
+                          .fillMaxHeight()
+                          .weight(1f),
+                    verticalArrangement = Arrangement.SpaceAround,
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    MoneyManagement.colors.forEach { color ->
+                        Card(
+                            modifier = Modifier
+                                  .height(25.dp)
+                                  .width(8.dp), RoundedCornerShape(10.dp)
                         ) {
-                              MoneyManagement.colors.forEach { color ->
-                                    Card(
-                                          modifier = Modifier
-                                                .height(25.dp)
-                                                .width(8.dp) , RoundedCornerShape(10.dp)
-                                    ) {
-                                          Divider(color = color)
-                                    }
-                              }
+                            Divider(color = color)
                         }
-                        Column(
-                              modifier = Modifier
-                                    .fillMaxWidth(0.9f)
-                                    .weight(3.5f) ,
-                              horizontalAlignment = Alignment.CenterHorizontally ,
-                              verticalArrangement = Arrangement.SpaceAround
+                    }
+                }
+                Column(
+                    modifier = Modifier
+                          .fillMaxWidth(0.9f)
+                          .weight(3.5f),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.SpaceAround
+                ) {
+                    radioOption.forEach { text ->
+                        Row(
+                            modifier = Modifier
+                                  .fillMaxWidth()
+                                  .height(74.dp),
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.SpaceBetween
                         ) {
-                              radioOption.forEach { text ->
-                                    Row(
-                                          modifier = Modifier
-                                                .fillMaxWidth()
-                                                .height(74.dp) ,
-                                          verticalAlignment = Alignment.CenterVertically ,
-                                          horizontalArrangement = Arrangement.SpaceBetween
-                                    ) {
-                                          Text(text = text , modifier = Modifier)
-                                    }
-                                    Divider()
-                              }
+                            Text(text = text, modifier = Modifier)
                         }
-                        Column(
-                              modifier = Modifier
-                                    .fillMaxWidth(0.1f)
-                                    .fillMaxHeight()
-                                    .weight(1f) ,
-                              verticalArrangement = Arrangement.SpaceAround ,
-                              horizontalAlignment = Alignment.CenterHorizontally
-                        ) {
-                              MoneyManagement.colors.forEach { color ->
-                                    val colorInt = color.toArgb()
-                                    Box(
-                                          modifier = Modifier
-                                                .size(22.dp)
-                                                .shadow(15.dp , CircleShape)
-                                                .clip(
-                                                      CircleShape
-                                                )
-                                                .background(Color.White)
-                                                .border(
-                                                      width = 5.dp ,
-                                                      color = if (viewModel.changeColor.value == colorInt) color else Color.White ,
-                                                      shape = CircleShape
-                                                )
-                                                .clickable {
-                                                      viewModel.onEvent(
-                                                            AddMoneyActionDecreaseEvent.ChangeColorDecrease(
-                                                                  colorInt
-                                                            )
-                                                      )
-                                                }
-                                    )
-                              }
-                        }
-                  }
+                        Divider()
+                    }
+                }
+                Column(
+                    modifier = Modifier
+                          .fillMaxWidth(0.1f)
+                          .fillMaxHeight()
+                          .weight(1f),
+                    verticalArrangement = Arrangement.SpaceAround,
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    MoneyManagement.colors.forEach { color ->
+                        val colorInt = color.toArgb()
+                        Box(
+                            modifier = Modifier
+                                  .size(22.dp)
+                                  .shadow(15.dp, CircleShape)
+                                  .clip(
+                                        CircleShape
+                                  )
+                                  .background(Color.White)
+                                  .border(
+                                        width = 5.dp,
+                                        color = if (viewModel.changeColor.value == colorInt) color else Color.White,
+                                        shape = CircleShape
+                                  )
+                                  .clickable {
+                                        viewModel.onEvent(
+                                              AddMoneyActionDecreaseEvent.ChangeColorDecrease(
+                                                    colorInt
+                                              )
+                                        )
+                                  }
+                        )
+                    }
+                }
             }
-      }
+        }
+    }
 }
