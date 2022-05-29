@@ -64,7 +64,7 @@ fun RallyApp() {
                                    navController.popBackStack()
                               }
                          },
-                         currentScreen = currentScreen
+                         currentScreen = currentScreen,
                     )
                }
           ) { innerPadding ->

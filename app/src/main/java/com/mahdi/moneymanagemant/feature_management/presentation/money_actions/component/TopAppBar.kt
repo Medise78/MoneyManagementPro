@@ -45,7 +45,6 @@ import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import androidx.navigation.navOptions
 import com.mahdi.moneymanagemant.feature_management.presentation.money_actions.unit.RallyScreen
 import java.util.Locale
 
@@ -53,21 +52,24 @@ import java.util.Locale
 fun RallyTabRow(
     allScreens: List<RallyScreen>,
     onTabSelected: (RallyScreen) -> Unit,
-    currentScreen: RallyScreen
+    currentScreen: RallyScreen,
+    showTabs:Boolean = true
 ) {
     Surface(
         Modifier
             .height(TabHeight)
             .fillMaxWidth()
     ) {
-        Row(Modifier.selectableGroup()) {
-            allScreens.forEach { screen ->
-                RallyTab(
-                    text = screen.name,
-                    icon = screen.icon,
-                    onSelected = { onTabSelected(screen) },
-                    selected = currentScreen == screen
-                )
+        if (showTabs){
+            Row(Modifier.selectableGroup()) {
+                allScreens.forEach { screen ->
+                    RallyTab(
+                        text = screen.name,
+                        icon = screen.icon,
+                        onSelected = { onTabSelected(screen) },
+                        selected = currentScreen == screen
+                    )
+                }
             }
         }
     }
