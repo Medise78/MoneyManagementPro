@@ -24,6 +24,7 @@ import com.mahdi.moneymanagemant.feature_management.presentation.add_money_actio
 import com.mahdi.moneymanagemant.feature_management.presentation.add_money_action.component.SaveButtonIncrease
 import com.mahdi.moneymanagemant.feature_management.presentation.add_money_action.component.TextFieldCustom
 import kotlinx.coroutines.flow.collectLatest
+import java.text.DecimalFormat
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @ExperimentalComposeUiApi
@@ -176,7 +177,7 @@ fun AddMoneyActionScreen(
                                         ) {
                                              TextFieldCustom(
                                                   labelText = "Enter Description...",
-                                                  text = contentState.text,
+                                                  text =contentState.text,
                                                   textChange = {
                                                        viewModel.onEvent(
                                                             AddMoneyActionEvent.Content(
@@ -238,3 +239,4 @@ fun AddMoneyActionScreen(
           }
      }
 }
+private val AccountDecimalFormat = DecimalFormat.getIntegerInstance()

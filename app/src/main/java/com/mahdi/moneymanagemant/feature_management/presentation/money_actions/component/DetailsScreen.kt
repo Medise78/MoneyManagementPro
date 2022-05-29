@@ -43,7 +43,6 @@ fun <T> StatementBody(
     colors: (T) -> Color,
     amounts: (T) -> Float,
     amountsTotal: Float,
-    description:String,
     circleLabel: String,
     rows: @Composable (T) -> Unit
 ) {
@@ -77,36 +76,8 @@ fun <T> StatementBody(
             Column(modifier = Modifier.padding(12.dp)) {
                 items.forEach { item ->
                     rows(item)
+
                 }
-            }
-        }
-        Expand(text = description)
-
-    }
-}
-
-@Composable
-fun Expand(
-    text:String
-){
-    Column(
-        Modifier
-            .fillMaxSize()
-            .padding(20.dp), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center) {
-
-        var showMore by remember { mutableStateOf(false) }
-
-        Column(modifier = Modifier
-            .animateContentSize(animationSpec = tween(200))
-            .clickable(
-                interactionSource = remember { MutableInteractionSource() },
-                indication = null
-            ) { showMore = !showMore }) {
-
-            if (showMore) {
-                Text(text = text ,style = MaterialTheme.typography.body1,)
-            } else {
-                Text(text = text ,style = MaterialTheme.typography.body1, maxLines = 1, overflow = TextOverflow.Ellipsis)
             }
         }
     }

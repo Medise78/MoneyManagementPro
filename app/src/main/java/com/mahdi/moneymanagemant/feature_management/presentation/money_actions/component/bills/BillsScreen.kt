@@ -29,8 +29,7 @@ fun BillsBody(
                     modifier = Modifier.clickable { onBillsClick(bill.idDecrease!!) },
                     moneyManagementDecrease = bill
                )
-          },
-          description = bills.map { bills ->bills.contentDecrease }.toString()
+          }
      )
 }
 
@@ -42,7 +41,6 @@ fun SingleBillsBody(bill: MoneyManagementDecrease) {
           amounts = { bill.priceDecrease.toFloat() },
           amountsTotal = bill.priceDecrease.toFloat(),
           circleLabel = bill.nameDecrease,
-          description = bill.contentDecrease
      ) { row ->
           BillRowFake(
                moneyManagementDecrease = row,
