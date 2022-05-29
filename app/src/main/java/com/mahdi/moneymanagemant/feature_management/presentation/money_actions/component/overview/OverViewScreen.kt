@@ -181,6 +181,7 @@ private fun AlertItem(message: String) {
 private fun <T> OverviewScreenCardAccounts(
      navController: NavController,
      viewModel: MoneyActionsViewModel = hiltViewModel(),
+     viewModelBills : MoneyActionsDecreaseViewModel = hiltViewModel(),
      title: String,
      date:String,
      amount: Double,
@@ -195,6 +196,7 @@ private fun <T> OverviewScreenCardAccounts(
 
      val state = viewModel.state.value
      val revealedCardIds = viewModel.revealedCardIdsList.collectAsState()
+     val billState = viewModelBills.state.value
 
      Card {
           Column {
@@ -224,11 +226,16 @@ private fun <T> OverviewScreenCardAccounts(
                          ) {
                               IconButton(onClick = {
                                    for (i in state.moneyActions){
-                                         val id = i.id
-                                         id?.let { it1 -> viewModel.onItemCollapsed(it1) }
+                                        val id = i.id
+                                        viewModel.onItemCollapsed(id!!)
+                                   }
+                                   for (i in billState.moneyActions){
+                                        val id = i.idDecrease
+                                        viewModelBills.onItemCollapsed(id!!)
                                    }
                                    onClickAdd()
-                                    }) {
+                                    }
+                              ) {
                                    Icon(
                                         imageVector = Icons.Default.Add,
                                         contentDescription = "Add",
@@ -282,8 +289,13 @@ private fun <T> OverviewScreenCardAccounts(
                                                        Screen.AddMoneyActionIncreaseScreen.route +
                                                                  "?moneyManagementId=${moneyManagement.id}"
                                                   )
-                                                  moneyManagement.id?.let {
-                                                       viewModel.onItemCollapsed(it)
+                                                  for (i in state.moneyActions){
+                                                       val id = i.id
+                                                       viewModel.onItemCollapsed(id!!)
+                                                  }
+                                                  for (i in billState.moneyActions){
+                                                       val id = i.idDecrease
+                                                       viewModelBills.onItemCollapsed(id!!)
                                                   }
                                              },
                                         )
@@ -325,6 +337,7 @@ private fun <T> OverviewScreenCardAccounts(
 @Composable
 private fun <T> OverviewScreenCardBills(
      viewModel: MoneyActionsDecreaseViewModel = hiltViewModel(),
+     viewModelAccount : MoneyActionsViewModel = hiltViewModel(),
      navController: NavController,
      title: String,
      amount: Double,
@@ -338,7 +351,7 @@ private fun <T> OverviewScreenCardBills(
 ) {
      val state = viewModel.state.value
      val revealedCardIds = viewModel.revealedCardIdsList.collectAsState()
-     val moneyManagementId = state.moneyActions.find { true }?.idDecrease
+     val stateAcc = viewModelAccount.state.value
 
      Card {
           Column {
@@ -371,6 +384,10 @@ private fun <T> OverviewScreenCardBills(
                                           val id = i.idDecrease
                                           id?.let { it1 -> viewModel.onItemCollapsed(it1) }
                                     }
+                                   for (i in stateAcc.moneyActions){
+                                        val id = i.id
+                                        viewModelAccount.onItemCollapsed(id!!)
+                                   }
                               }) {
                                    Icon(
                                         imageVector = Icons.Default.Add,
@@ -421,6 +438,14 @@ private fun <T> OverviewScreenCardBills(
                                                        Screen.AddMoneyActionDecreaseScreen.route +
                                                                  "?moneyManagementDecreaseId=${moneyManagement.idDecrease}"
                                                   )
+                                                  for (i in state.moneyActions){
+                                                       val id = i.idDecrease
+                                                       viewModel.onItemCollapsed(id!!)
+                                                  }
+                                                  for (i in stateAcc.moneyActions){
+                                                       val id = i.id
+                                                       viewModelAccount.onItemCollapsed(id!!)
+                                                  }
                                              },
                                         )
                                         Spacer(modifier = Modifier.height(16.dp))
