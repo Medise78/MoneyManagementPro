@@ -181,13 +181,9 @@ fun RallyNavHost(
 }
 
 private fun navigateToSingleAccount(navController: NavHostController, accountId: Int) {
-     navController.navigate("${RallyScreen.Accounts.name}/$accountId"){
-          navController.popBackStack()
-     }
+     navController.navigate("${RallyScreen.Accounts.name}/$accountId")
 }
 
 private fun navigateToSingleBills(navController: NavHostController, accountId: Int) {
-     navController.navigate("${RallyScreen.Bills.name}/$accountId"){
-          navController.popBackStack()
-     }
+     navController.navigate("${RallyScreen.Bills.name}/$accountId")
 }

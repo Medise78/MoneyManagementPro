@@ -37,7 +37,6 @@ fun AddMoneyActionScreen(
      val contentState = viewModel.contentState.value
      val cardNumberState = viewModel.cardNumberState.value
      val priceState = viewModel.priceState.value
-     val dataState = viewModel.dateState.value
 
      LaunchedEffect(key1 = true) {
           viewModel.sharedFlow.collectLatest { event ->

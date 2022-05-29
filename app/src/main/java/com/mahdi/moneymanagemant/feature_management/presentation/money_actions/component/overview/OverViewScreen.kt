@@ -1,8 +1,6 @@
 package com.mahdi.moneymanagemant.feature_management.presentation.money_actions.component.overview
 
 import android.annotation.SuppressLint
-import android.icu.number.NumberFormatter
-import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -194,6 +192,7 @@ private fun <T> OverviewScreenCardAccounts(
      data: List<T>,
      row: @Composable (T) -> Unit,
 ) {
+
      val state = viewModel.state.value
      val revealedCardIds = viewModel.revealedCardIdsList.collectAsState()
 
@@ -223,7 +222,13 @@ private fun <T> OverviewScreenCardAccounts(
                                    .weight(1f),
                               contentAlignment = Alignment.CenterEnd
                          ) {
-                              IconButton(onClick = onClickAdd) {
+                              IconButton(onClick = {
+                                   for (i in state.moneyActions){
+                                         val id = i.id
+                                         id?.let { it1 -> viewModel.onItemCollapsed(it1) }
+                                   }
+                                   onClickAdd()
+                                    }) {
                                    Icon(
                                         imageVector = Icons.Default.Add,
                                         contentDescription = "Add",
@@ -268,12 +273,18 @@ private fun <T> OverviewScreenCardAccounts(
                                                             moneyManagement
                                                        )
                                                   )
+                                                  moneyManagement.id?.let {
+                                                       viewModel.onItemCollapsed(it)
+                                                  }
                                              },
                                              onEdit = {
                                                   navController.navigate(
                                                        Screen.AddMoneyActionIncreaseScreen.route +
                                                                  "?moneyManagementId=${moneyManagement.id}"
                                                   )
+                                                  moneyManagement.id?.let {
+                                                       viewModel.onItemCollapsed(it)
+                                                  }
                                              },
                                         )
                                         Spacer(modifier = Modifier.height(16.dp))
@@ -327,6 +338,7 @@ private fun <T> OverviewScreenCardBills(
 ) {
      val state = viewModel.state.value
      val revealedCardIds = viewModel.revealedCardIdsList.collectAsState()
+     val moneyManagementId = state.moneyActions.find { true }?.idDecrease
 
      Card {
           Column {
@@ -353,7 +365,13 @@ private fun <T> OverviewScreenCardBills(
                                    .weight(1f),
                               contentAlignment = Alignment.CenterEnd
                          ) {
-                              IconButton(onClick = onClickAdd) {
+                              IconButton(onClick = {
+                                   onClickAdd()
+                                    for (i in state.moneyActions){
+                                          val id = i.idDecrease
+                                          id?.let { it1 -> viewModel.onItemCollapsed(it1) }
+                                    }
+                              }) {
                                    Icon(
                                         imageVector = Icons.Default.Add,
                                         contentDescription = "Add",

@@ -2,6 +2,7 @@ package com.mahdi.moneymanagemant.feature_management.data.data_resource.money_in
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
 import com.mahdi.moneymanagemant.feature_management.domain.model.money_increase_model.MoneyManagement
 
 @Database(

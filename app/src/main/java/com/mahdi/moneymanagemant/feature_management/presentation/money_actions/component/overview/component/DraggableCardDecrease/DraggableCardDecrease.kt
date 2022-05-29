@@ -83,6 +83,9 @@ fun DraggableCardDecrease(
           shape = RoundedCornerShape(0.dp),
           elevation = cardElevation,
      ) {
-          BillRowFake(moneyManagementDecrease = moneyManagement,modifier = Modifier.clickable { onBillClick(moneyManagement.idDecrease!!) })
+          BillRowFake(moneyManagementDecrease = moneyManagement,modifier = Modifier.clickable {
+               onBillClick(moneyManagement.idDecrease!!)
+               onCollapse()
+          })
      }
 }
