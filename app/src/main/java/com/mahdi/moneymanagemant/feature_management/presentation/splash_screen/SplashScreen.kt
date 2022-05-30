@@ -42,7 +42,7 @@ fun SplashScreen(navController: NavController) {
       LaunchedEffect(key1 = true) {
 
             // Customize the delay time
-            delay(1000L)
+            delay(2500L)
             navController.navigate(RallyScreen.Overview.name){
                   navController.popBackStack()
             }
