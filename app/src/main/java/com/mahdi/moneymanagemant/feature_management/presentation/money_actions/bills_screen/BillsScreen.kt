@@ -5,6 +5,7 @@ import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Description
@@ -185,8 +186,10 @@ private fun SingleBaseRowBill(
                         CompositionLocalProvider(
                               LocalContentAlpha provides ContentAlpha.medium
                         ) {
-                              Text(text = subtitle , style = typography.subtitle1 ,
-                                   modifier = Modifier.padding(start = 13.dp))
+                              SelectionContainer {
+                                    Text(text = subtitle , style = typography.subtitle1 ,
+                                         modifier = Modifier.padding(start = 13.dp))
+                              }
                         }
                   }
             }
