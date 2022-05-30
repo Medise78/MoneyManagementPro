@@ -1,8 +1,14 @@
 package com.mahdi.moneymanagemant.feature_management.presentation
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.EnterTransition
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.expandHorizontally
+import androidx.compose.animation.expandVertically
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
@@ -15,6 +21,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.*
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.mahdi.moneymanagemant.feature_management.presentation.add_money_action.decrease_screen.AddMoneyActionDecreaseScreen
 import com.mahdi.moneymanagemant.feature_management.presentation.add_money_action.increaseScreen.AddMoneyActionScreen
@@ -27,6 +34,7 @@ import com.mahdi.moneymanagemant.feature_management.presentation.money_actions.c
 import com.mahdi.moneymanagemant.feature_management.presentation.money_actions.decrease_screen.MoneyActionsDecreaseViewModel
 import com.mahdi.moneymanagemant.feature_management.presentation.money_actions.increase_screen.MoneyActionsViewModel
 import com.mahdi.moneymanagemant.feature_management.presentation.money_actions.unit.RallyScreen
+import com.mahdi.moneymanagemant.feature_management.presentation.splash_screen.SplashScreen
 import com.mahdi.moneymanagemant.feature_management.presentation.util.Screen
 import com.mahdi.moneymanagemant.ui.theme.RallyTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -44,31 +52,36 @@ class MainActivity : ComponentActivity() {
      }
 }
 
+@SuppressLint("CoroutineCreationDuringComposition")
 @Composable
 fun RallyApp() {
      RallyTheme {
           val allScreens = RallyScreen.values().toList()
           val navController = rememberNavController()
+          val scope = rememberCoroutineScope()
           var currentScreen by rememberSaveable {
                mutableStateOf(RallyScreen.Overview)
           }
 
-          Scaffold(
-               topBar = {
-                    RallyTabRow(
-                         allScreens = allScreens,
-                         onTabSelected = { screen ->
-                              currentScreen = screen
-                              navController.navigate(screen.name){
-                                   navController.popBackStack()
-                              }
-                         },
-                         currentScreen = currentScreen,
-                    )
+               Scaffold(
+                    topBar = {
+                         AnimatedVisibility(visible = currentRoute(navController = navController) != Screen.SplashScreen.route , enter = expandVertically()) {
+                              RallyTabRow(
+                                   allScreens = allScreens,
+                                   onTabSelected = { screen ->
+                                        currentScreen = screen
+                                        navController.navigate(screen.name){
+                                             navController.popBackStack()
+                                        }
+                                   },
+                                   currentScreen = currentScreen,
+                              )
+                         }
+
+                    }
+               ) { innerPadding ->
+                    RallyNavHost(navController, modifier = Modifier.padding(innerPadding))
                }
-          ) { innerPadding ->
-               RallyNavHost(navController, modifier = Modifier.padding(innerPadding))
-          }
      }
 }
 
@@ -84,10 +97,14 @@ fun RallyNavHost(
      val stateDecrease = viewModelDecrease.state.value
      NavHost(
           navController = navController,
-          startDestination = RallyScreen.Overview.name,
+          startDestination = Screen.SplashScreen.route,
           modifier = modifier
      ) {
+          composable(Screen.SplashScreen.route){
+               SplashScreen(navController = navController)
+          }
           composable(RallyScreen.Overview.name) {
+
                OverviewBody(
                     onClickSeeAllAccounts = { navController.navigate(RallyScreen.Accounts.name) },
                     onClickSeeAllBills = { navController.navigate(RallyScreen.Bills.name) },
@@ -185,4 +202,10 @@ private fun navigateToSingleAccount(navController: NavHostController, accountId:
 
 private fun navigateToSingleBills(navController: NavHostController, accountId: Int) {
      navController.navigate("${RallyScreen.Bills.name}/$accountId")
+}
+
+@Composable
+private fun currentRoute(navController : NavController):String?{
+     val navBackStackEntry by navController.currentBackStackEntryAsState()
+     return navBackStackEntry?.destination?.route
 }
