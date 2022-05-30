@@ -24,7 +24,6 @@ import com.mahdi.moneymanagemant.feature_management.presentation.add_money_actio
 import com.mahdi.moneymanagemant.feature_management.presentation.add_money_action.component.SaveButtonIncrease
 import com.mahdi.moneymanagemant.feature_management.presentation.add_money_action.component.TextFieldCustom
 import kotlinx.coroutines.flow.collectLatest
-import java.text.DecimalFormat
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @ExperimentalComposeUiApi
@@ -144,7 +143,7 @@ fun AddMoneyActionScreen(
                                             text = priceState.text,
                                             textChange = {
                                                 viewModel.onEvent(
-                                                    AddMoneyActionEvent.Price(it)
+                                                    AddMoneyActionEvent.Price (it)
                                                 )
                                             },
                                             keyboardType = KeyboardType.Number,

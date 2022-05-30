@@ -561,3 +561,11 @@ private fun SeeAllButton(modifier: Modifier = Modifier, onClick: () -> Unit) {
 }
 
 private val RallyDefaultPadding = 12.dp
+
+fun getCard(
+       popularity : String ,
+) : String
+{
+        val formatPopularity = popularity.split("-")
+        return formatPopularity[0]
+}

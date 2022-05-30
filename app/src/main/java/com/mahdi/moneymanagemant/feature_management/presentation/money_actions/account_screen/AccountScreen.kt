@@ -154,38 +154,35 @@ private fun SingleBaseRowAccount(
             }
         }
         AnimatedVisibility(visible = expanded) {
-            Box(modifier = Modifier.height(75.dp)) {
+
+            Column {
+                val typography = MaterialTheme.typography
                 Row(
                     modifier = modifier
-                        .height(70.dp),
+                        .height(70.dp) ,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    val typography = MaterialTheme.typography
+
 
                     Spacer(Modifier.width(12.dp))
-                    Column(Modifier) {
-                        Text(text = "Description", style = typography.body1)
-                        CompositionLocalProvider(
-                            LocalContentAlpha provides ContentAlpha.medium
-                        ) {
-                            Spacer(modifier = Modifier.padding(8.dp))
-                            Text(text = subtitle, style = typography.subtitle1)
-                        }
+                    Text(text = "Description" , style = typography.body1)
+                    Box(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .padding(end = 12.dp , top = 10.dp) ,
+                        contentAlignment = Alignment.CenterEnd
+                    ) {
+                        Text(
+                            text = date ,
+                            style = typography.h6
+                        )
                     }
-                    Spacer(Modifier.weight(1f))
-                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                        Box(
-                            modifier = Modifier
-                                .fillMaxSize()
-                                .padding(end = 12.dp, top = 10.dp),
-                            contentAlignment = Alignment.CenterEnd
-                        ) {
-                            Text(
-                                text = date,
-                                style = typography.h6
-                            )
-                        }
-                    }
+                }
+                CompositionLocalProvider(
+                    LocalContentAlpha provides ContentAlpha.medium
+                ) {
+                    Text(text = subtitle , style = typography.subtitle1 ,
+                         modifier = Modifier.padding(start = 13.dp))
                 }
             }
         }

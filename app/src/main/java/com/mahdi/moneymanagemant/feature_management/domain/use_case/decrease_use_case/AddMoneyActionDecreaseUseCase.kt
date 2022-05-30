@@ -16,9 +16,6 @@ class AddMoneyActionDecreaseUseCase(
           if (moneyManagementDecrease.nameDecrease.length > 15){
                throw InvalidExceptionDecrease("long Title")
           }
-          if (moneyManagementDecrease.contentDecrease.isBlank()) {
-               throw InvalidExceptionDecrease("Set Content")
-          }
           if (moneyManagementDecrease.priceDecrease.isBlank()) {
                throw InvalidExceptionDecrease("Set Price")
           }

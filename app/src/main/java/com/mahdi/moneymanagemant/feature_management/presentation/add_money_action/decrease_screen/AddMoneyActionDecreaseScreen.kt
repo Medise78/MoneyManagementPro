@@ -172,40 +172,6 @@ fun AddMoneyActionDecreaseScreen(
                                     contentAlignment = Alignment.Center
                                 ) {
                                     TextFieldCustom(
-                                        labelText = "Enter Description...",
-                                        text = contentState.text,
-                                        textChange = {
-                                            viewModel.onEvent(
-                                                AddMoneyActionDecreaseEvent.ContentDecrease(
-                                                    it
-                                                )
-                                            )
-                                        },
-                                        keyboardType = KeyboardType.Text,
-                                    )
-                                }
-                            }
-                            Spacer(modifier = Modifier.height(40.dp))
-                            Box(modifier = Modifier.padding(bottom = 15.dp)) {
-                                Text(
-                                    text = "Card Number :",
-                                    fontFamily = FontFamily.SansSerif,
-                                    fontSize = 14.sp,
-                                    fontWeight = FontWeight.ExtraBold
-                                )
-                            }
-                            Card(
-                                modifier = Modifier
-                                     .fillMaxWidth(0.85f)
-                                     .height(60.dp), RoundedCornerShape(15.dp), elevation = 5.dp
-                            ) {
-                                Box(
-                                    modifier = Modifier
-                                         .fillMaxSize()
-                                         .background(Color(0xFFF8F8F8)),
-                                    contentAlignment = Alignment.Center
-                                ) {
-                                    TextFieldCustom(
                                         labelText = "Description...",
                                         text = cardNumberState.text,
                                         textChange = {

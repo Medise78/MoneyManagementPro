@@ -2,6 +2,7 @@ package com.mahdi.moneymanagemant.feature_management.presentation.money_actions.
 
 import android.annotation.SuppressLint
 import androidx.compose.animation.animateColor
+import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectHorizontalDragGestures
@@ -73,7 +74,7 @@ fun DraggableCard(
                         dragAmount < -MIN_DRAG_AMOUNT -> onCollapse()
                     }
                 }
-            },
+            }.animateContentSize(),
         backgroundColor = cardBgColor,
         shape = RoundedCornerShape(0.dp),
         elevation = cardElevation,
