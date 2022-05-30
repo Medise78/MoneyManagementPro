@@ -1,8 +1,6 @@
-package com.mahdi.moneymanagemant.feature_management.presentation.money_actions.component.overview.component
+package com.mahdi.moneymanagemant.feature_management.presentation.money_actions.overview_screen.component
 
 import androidx.compose.animation.*
-import androidx.compose.animation.core.animate
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -11,14 +9,11 @@ import androidx.compose.material.IconButton
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Edit
-import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import kotlinx.coroutines.launch
 
 @ExperimentalAnimationApi
 @Composable

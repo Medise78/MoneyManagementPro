@@ -1,4 +1,4 @@
-package com.mahdi.moneymanagemant.feature_management.presentation.money_actions.component.overview.component.DraggableCardIncrease
+package com.mahdi.moneymanagemant.feature_management.presentation.money_actions.overview_screen.component.DraggableCardIncrease
 
 import android.annotation.SuppressLint
 import androidx.compose.animation.animateColor
@@ -10,7 +10,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.pointer.pointerInput
