@@ -6,6 +6,7 @@ import android.annotation.SuppressLint
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -15,16 +16,13 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.mahdi.moneymanagemant.feature_management.presentation.add_money_action.component.MyContent
-import com.mahdi.moneymanagemant.feature_management.presentation.add_money_action.component.RadioButtonsIncrease
-import com.mahdi.moneymanagemant.feature_management.presentation.add_money_action.component.SaveButtonIncrease
-import com.mahdi.moneymanagemant.feature_management.presentation.add_money_action.component.TextFieldCustom
-import com.mahdi.moneymanagemant.feature_management.presentation.util.creditCardFormatted
-import com.mahdi.moneymanagemant.feature_management.presentation.util.creditCardFormatted2
+import com.mahdi.moneymanagemant.feature_management.presentation.add_money_action.component.*
+import com.mahdi.moneymanagemant.feature_management.presentation.util.*
 import kotlinx.coroutines.flow.collectLatest
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
@@ -55,20 +53,20 @@ fun AddMoneyActionScreen(
     Scaffold(scaffoldState = scaffoldState) {
         Column(
             modifier = Modifier
-                 .fillMaxSize()
-                 .background(Color.DarkGray)
-                 .padding(16.dp)
+                .fillMaxSize()
+                .background(Color.DarkGray)
+                .padding(16.dp)
         ) {
             Box(
                 modifier = Modifier
-                     .fillMaxWidth()
-                     .fillMaxHeight(0.88f), contentAlignment = Alignment.Center
+                    .fillMaxWidth()
+                    .fillMaxHeight(0.88f), contentAlignment = Alignment.Center
             ) {
                 Column {
                     Box(
                         modifier = Modifier
-                             .fillMaxSize()
-                             .offset(x = 30.dp)
+                            .fillMaxSize()
+                            .offset(x = 30.dp)
                     ) {
                         Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
                             Box(modifier = Modifier.padding(bottom = 15.dp)) {
@@ -84,13 +82,13 @@ fun AddMoneyActionScreen(
                             }
                             Card(
                                 modifier = Modifier
-                                     .fillMaxWidth(0.85f)
-                                     .height(60.dp), RoundedCornerShape(15.dp), elevation = 5.dp
+                                    .fillMaxWidth(0.85f)
+                                    .height(60.dp), RoundedCornerShape(15.dp), elevation = 5.dp
                             ) {
                                 Box(
                                     modifier = Modifier
-                                         .fillMaxSize()
-                                         .background(Color(0xFFF8F8F8)),
+                                        .fillMaxSize()
+                                        .background(Color(0xFFF8F8F8)),
                                     contentAlignment = Alignment.Center
                                 ) {
                                     TextFieldCustom(
@@ -129,18 +127,18 @@ fun AddMoneyActionScreen(
                                 }
                                 Card(
                                     modifier = Modifier
-                                         .fillMaxWidth(0.85f)
-                                         .height(60.dp),
+                                        .fillMaxWidth(0.85f)
+                                        .height(60.dp),
                                     RoundedCornerShape(15.dp),
                                     elevation = 5.dp
                                 ) {
                                     Box(
                                         modifier = Modifier
-                                             .fillMaxSize()
-                                             .background(Color(0xFFF8F8F8)),
+                                            .fillMaxSize()
+                                            .background(Color(0xFFF8F8F8)),
                                         contentAlignment = Alignment.Center
                                     ) {
-                                        TextFieldCustom(
+                                        TextFieldCustomPrice(
                                             labelText = "Enter Price...",
                                             text = priceState.text,
                                             textChange = {
@@ -167,13 +165,13 @@ fun AddMoneyActionScreen(
                             }
                             Card(
                                 modifier = Modifier
-                                     .fillMaxWidth(0.85f)
-                                     .height(60.dp), RoundedCornerShape(15.dp), elevation = 5.dp
+                                    .fillMaxWidth(0.85f)
+                                    .height(60.dp), RoundedCornerShape(15.dp), elevation = 5.dp
                             ) {
                                 Box(
                                     modifier = Modifier
-                                         .fillMaxSize()
-                                         .background(Color(0xFFF8F8F8)),
+                                        .fillMaxSize()
+                                        .background(Color(0xFFF8F8F8)),
                                     contentAlignment = Alignment.Center
                                 ) {
                                     TextFieldCustom(
@@ -201,16 +199,16 @@ fun AddMoneyActionScreen(
                             }
                             Card(
                                 modifier = Modifier
-                                     .fillMaxWidth(0.85f)
-                                     .height(60.dp), RoundedCornerShape(15.dp), elevation = 5.dp
+                                    .fillMaxWidth(0.85f)
+                                    .height(60.dp), RoundedCornerShape(15.dp), elevation = 5.dp
                             ) {
                                 Box(
                                     modifier = Modifier
-                                         .fillMaxSize()
-                                         .background(Color(0xFFF8F8F8)),
+                                        .fillMaxSize()
+                                        .background(Color(0xFFF8F8F8)),
                                     contentAlignment = Alignment.Center
                                 ) {
-                                    TextFieldCustom(
+                                    TextFieldCustomCardNumber(
                                         labelText = "Enter Card Number...",
                                         text = cardNumberState.text,
                                         textChange = {
@@ -230,8 +228,8 @@ fun AddMoneyActionScreen(
             }
             Box(
                 modifier = Modifier
-                     .fillMaxWidth()
-                     .fillMaxHeight(0.6f),
+                    .fillMaxWidth()
+                    .fillMaxHeight(0.6f),
                 contentAlignment = Alignment.BottomCenter
             ) {
                 SaveButtonIncrease()

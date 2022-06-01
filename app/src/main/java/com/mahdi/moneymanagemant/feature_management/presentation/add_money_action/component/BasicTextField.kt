@@ -17,8 +17,11 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
+import com.mahdi.moneymanagemant.feature_management.presentation.util.ThousandSeparatorVisualTransformation
+import com.mahdi.moneymanagemant.feature_management.presentation.util.formatOtherCardNumbers
 
 @ExperimentalComposeUiApi
 @Composable
@@ -58,5 +61,90 @@ fun TextFieldCustom(
             unfocusedIndicatorColor = Color(0xFF6B6969),
             disabledIndicatorColor = Color(0xFF6B6969)
         )
+    )
+}
+
+@ExperimentalComposeUiApi
+@Composable
+fun TextFieldCustomCardNumber(
+       text: String,
+       textChange: (String) -> Unit,
+       labelText: String,
+       keyboardType: KeyboardType,
+       modifier: Modifier = Modifier
+) {
+    val keyboardController = LocalSoftwareKeyboardController.current
+
+    TextField(
+        value = text,
+        onValueChange = textChange,
+        keyboardOptions = KeyboardOptions(
+            keyboardType = KeyboardType.Number,
+        ),
+        keyboardActions = KeyboardActions(onDone = { keyboardController?.hide() }),
+        maxLines = 1,
+        textStyle = TextStyle(
+            color = Color.White,
+            textAlign = TextAlign.Start,
+            fontSize = 18.sp,
+            fontWeight = FontWeight.Normal,
+        ),
+        label = { Text(text = labelText, color = Color.White.copy(0.5f)) },
+        modifier = modifier
+            .background(Color.Transparent)
+            .fillMaxSize(),
+        colors = TextFieldDefaults.textFieldColors(
+            textColor = Color.White,
+            disabledTextColor = Color(0xFF6B6969),
+            backgroundColor = Color(0xFF6B6969),
+            focusedIndicatorColor = Color(0xFF6B6969),
+            unfocusedIndicatorColor = Color(0xFF6B6969),
+            disabledIndicatorColor = Color(0xFF6B6969)
+        ),
+        visualTransformation = VisualTransformation { number ->
+            formatOtherCardNumbers(number)
+        }
+    )
+}
+
+@ExperimentalComposeUiApi
+@Composable
+fun TextFieldCustomPrice(
+       text: String,
+       textChange: (String) -> Unit,
+       labelText: String,
+       keyboardType: KeyboardType,
+       modifier: Modifier = Modifier
+) {
+    val keyboardController = LocalSoftwareKeyboardController.current
+
+    TextField(
+        value = text,
+        onValueChange = textChange,
+        keyboardOptions = KeyboardOptions(
+            imeAction = ImeAction.Done,
+            keyboardType = keyboardType
+        ),
+        keyboardActions = KeyboardActions(onDone = { keyboardController?.hide() }),
+        maxLines = 1,
+        textStyle = TextStyle(
+            color = Color.White,
+            textAlign = TextAlign.Start,
+            fontSize = 18.sp,
+            fontWeight = FontWeight.Normal,
+        ),
+        label = { Text(text = labelText, color = Color.White.copy(0.5f)) },
+        modifier = modifier
+            .background(Color.Transparent)
+            .fillMaxSize(),
+        colors = TextFieldDefaults.textFieldColors(
+            textColor = Color.White,
+            disabledTextColor = Color(0xFF6B6969),
+            backgroundColor = Color(0xFF6B6969),
+            focusedIndicatorColor = Color(0xFF6B6969),
+            unfocusedIndicatorColor = Color(0xFF6B6969),
+            disabledIndicatorColor = Color(0xFF6B6969)
+        ),
+        visualTransformation = ThousandSeparatorVisualTransformation()
     )
 }

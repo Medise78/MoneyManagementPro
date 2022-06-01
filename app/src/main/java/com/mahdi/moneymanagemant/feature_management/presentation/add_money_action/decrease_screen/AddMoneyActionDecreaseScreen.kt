@@ -135,7 +135,7 @@ fun AddMoneyActionDecreaseScreen(
                                              .background(Color(0xFFF8F8F8)),
                                         contentAlignment = Alignment.Center
                                     ) {
-                                        TextFieldCustom(
+                                        TextFieldCustomPrice(
                                             labelText = "Enter Price...",
                                             text = priceState.text,
                                             textChange = {
