@@ -210,7 +210,7 @@ fun AddMoneyActionScreen(
                                 ) {
                                     TextFieldCustomCardNumber(
                                         labelText = "Enter Card Number...",
-                                        text = cardNumberState.text,
+                                        text = cardNumberState.text.take(16),
                                         textChange = {
                                             viewModel.onEvent(
                                                 AddMoneyActionEvent.CardNumber(
