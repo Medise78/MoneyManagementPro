@@ -34,6 +34,7 @@ import androidx.compose.ui.unit.sp
 import com.mahdi.moneymanagemant.feature_management.domain.model.money_increase_model.MoneyManagement
 import com.mahdi.moneymanagemant.feature_management.domain.model.money_decrease_model.MoneyManagementDecrease
 import com.mahdi.moneymanagemant.feature_management.presentation.money_actions.component.overview.getCard
+import com.mahdi.moneymanagemant.feature_management.presentation.util.creditCardFormatted
 import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols
 
@@ -93,7 +94,7 @@ private fun BaseRowAccount(
                     Text(text = title, style = typography.body1)
                     Spacer(modifier = Modifier.padding(5.dp))
                     CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.medium) {
-                        Text(text = subtitle, style = typography.subtitle1 , maxLines = 1 , overflow = TextOverflow.Ellipsis)
+                        Text(text = subtitle.creditCardFormatted, style = typography.subtitle1 , maxLines = 1 , overflow = TextOverflow.Ellipsis)
                     }
                 }
                 Spacer(Modifier.weight(1f))

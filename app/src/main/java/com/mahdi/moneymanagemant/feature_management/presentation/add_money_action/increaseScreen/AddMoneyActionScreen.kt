@@ -23,6 +23,8 @@ import com.mahdi.moneymanagemant.feature_management.presentation.add_money_actio
 import com.mahdi.moneymanagemant.feature_management.presentation.add_money_action.component.RadioButtonsIncrease
 import com.mahdi.moneymanagemant.feature_management.presentation.add_money_action.component.SaveButtonIncrease
 import com.mahdi.moneymanagemant.feature_management.presentation.add_money_action.component.TextFieldCustom
+import com.mahdi.moneymanagemant.feature_management.presentation.util.creditCardFormatted
+import com.mahdi.moneymanagemant.feature_management.presentation.util.creditCardFormatted2
 import kotlinx.coroutines.flow.collectLatest
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
